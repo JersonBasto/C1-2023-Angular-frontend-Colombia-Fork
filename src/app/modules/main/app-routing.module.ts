@@ -12,19 +12,73 @@ import { UpdateCostumerComponent } from '../user/pages/update-costumer/update-co
 import { HomeCustomerComponent } from '../user/pages/home-customer/home-customer.component';
 import { AccountUserComponent } from '../account/pages/account-user/account-user.component';
 
+import {
+  AngularFireAuthGuard,
+  redirectLoggedInTo,
+  redirectUnauthorizedTo,
+} from '@angular/fire/compat/auth-guard';
+
+const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
+const redirectLoggedInToDashboard = () => redirectLoggedInTo(['customer/home']);
+
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'customer', component: InfoCostumerComponent },
-  { path: 'transfer', component: InfoTransferComponent },
-  { path: 'deposit', component: InfoDepositComponent },
-  { path: 'account', component: AccountComponent },
+  {
+    path: 'customer',
+    component: InfoCostumerComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'transfer',
+    component: InfoTransferComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'deposit',
+    component: InfoDepositComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'account',
+    component: AccountComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
   { path: 'customer/updateCustomer', component: UpdateCostumerComponent },
-  { path: 'login', component: LoginComponent },
+  {
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectLoggedInToDashboard },
+  },
   { path: 'register', component: RegisterComponent },
-  { path: 'account/:id', component: InfoAccountComponent },
-  { path: 'customer/home', component: HomeCustomerComponent },
-  { path: 'customer/update/:id', component: UpdateCostumerComponent },
-  { path: 'customer/account', component: AccountUserComponent },
+  {
+    path: 'account/:id',
+    component: InfoAccountComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'customer/home',
+    component: HomeCustomerComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'customer/update/:id',
+    component: UpdateCostumerComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'customer/account',
+    component: AccountUserComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
 ];
 
 @NgModule({
