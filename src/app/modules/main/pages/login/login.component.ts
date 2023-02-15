@@ -5,6 +5,7 @@ import { Route, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
+import { AuthService } from '../../services/auth-service/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,37 +15,49 @@ import { environment } from 'src/environments/environment';
 export class LoginComponent implements OnInit {
   frmFormulario: FormGroup;
 
-  constructor(private readonly userService: ServiceUserService,
-    private readonly route: Router) {
+  constructor(
+    private readonly userService: ServiceUserService,
+    private readonly route: Router,
+    private readonly authService: AuthService
+  ) {
     this.frmFormulario = new FormGroup({
-      email: new FormControl(null, [Validators.required, Validators.pattern(new RegExp(environment.regexEmail))]),
-      password: new FormControl(null, [Validators.required, Validators.pattern(new RegExp(environment.regexPassword))])
-    })
+      email: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(new RegExp(environment.regexEmail)),
+      ]),
+      password: new FormControl(null, [
+        Validators.required,
+        Validators.pattern(new RegExp(environment.regexPassword)),
+      ]),
+    });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   login() {
     this.userService.login(this.frmFormulario.getRawValue()).subscribe({
       next: (data) => {
-        localStorage.setItem("token", data.access_token)
-        localStorage.setItem("id", data.id)
-        this.goToHomeUser()
+        localStorage.setItem('token', data.access_token);
+        localStorage.setItem('id', data.id);
+        this.goToHomeUser();
       },
       error: (err) => {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: err.error.message
-        })
+          text: err.error.message,
+        });
       },
       complete: () => {
-        console.log("complete")
-      }
-    })
+        console.log('complete');
+      },
+    });
+  }
+  loginGoogle() {
+    return this.authService.GoogleAuthLogin();
   }
 
   goToHomeUser() {
-    this.route.navigate(["./customer/home"])
+    this.route.navigate(['./customer/home']);
   }
 }

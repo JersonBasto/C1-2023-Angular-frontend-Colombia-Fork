@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
 import { Auth } from '@angular/fire/auth/firebase';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../../main/services/auth-service/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -22,7 +22,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private readonly userService: ServiceUserService,
     private readonly router: Router,
-    private readonly authService:AuthService
+    private readonly authService: AuthService
   ) {
     this.frmFormulario = new FormGroup({
       document: new FormControl(null, [
@@ -67,8 +67,8 @@ export class RegisterComponent implements OnInit {
       complete: () => console.log('complete'),
     });
   }
-  createUserByGoogle(){
-    return this.authService.GoogleAuth()
+  createUserByGoogle() {
+    return this.authService.GoogleAuth();
   }
 
   goToHomeCustomer() {

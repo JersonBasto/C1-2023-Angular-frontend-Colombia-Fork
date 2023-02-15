@@ -1,32 +1,57 @@
 <div class="container-login">
-    <form class="form-login" id="formUpdateuser" (ngSubmit)="login()" [formGroup]="frmFormulario">
-        <input class="input-login" placeholder="Email" formControlName="email">
-        <div class="altoMensaje" *ngIf="
+  <form
+    class="form-login"
+    id="formUpdateuser"
+    (ngSubmit)="login()"
+    [formGroup]="frmFormulario"
+  >
+    <input class="input-login" placeholder="Email" formControlName="email" />
+    <div
+      class="altoMensaje"
+      *ngIf="
         frmFormulario.get('email')?.hasError('required') &&
         frmFormulario.get('email')?.touched
-      ">
-            * El email es requerido
-        </div>
-        <div class="altoMensaje" *ngIf="
+      "
+    >
+      * El email es requerido
+    </div>
+    <div
+      class="altoMensaje"
+      *ngIf="
         frmFormulario.get('email')?.hasError('pattern') &&
         frmFormulario.get('email')?.touched
-      ">
-            * No cumple con la estructura de un correo válido
-        </div>
-        <input class="input-login" placeholder="password" type="password" formControlName="password">
-        <div class="altoMensaje" *ngIf="
+      "
+    >
+      * No cumple con la estructura de un correo válido
+    </div>
+    <input
+      class="input-login"
+      placeholder="password"
+      type="password"
+      formControlName="password"
+    />
+    <div
+      class="altoMensaje"
+      *ngIf="
         frmFormulario.get('password')?.hasError('required') &&
         frmFormulario.get('password')?.touched
-      ">
-            * El password es requerido
-        </div>
-        <div class="altoMensaje" *ngIf="
+      "
+    >
+      * El password es requerido
+    </div>
+    <div
+      class="altoMensaje"
+      *ngIf="
         frmFormulario.get('password')?.hasError('pattern') &&
         frmFormulario.get('password')?.touched
-      ">
-            * No cumple con la estructura de una contraseña valida (Debe tener como minimo 1 minuscula,1 mayuscula y un
-            1 numero)
-        </div>
-        <button class="btn-login" [disabled]="frmFormulario.invalid">Iniciar Sesion</button>
-    </form>
+      "
+    >
+      * No cumple con la estructura de una contraseña valida (Debe tener como
+      minimo 1 minuscula,1 mayuscula y un 1 numero)
+    </div>
+    <button class="btn-login" [disabled]="frmFormulario.invalid">
+      Iniciar Sesion
+    </button>
+    <button (click)="loginGoogle()">Iniciar Google</button>
+  </form>
 </div>

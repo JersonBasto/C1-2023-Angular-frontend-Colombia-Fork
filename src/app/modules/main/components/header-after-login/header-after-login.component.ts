@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { AuthService } from '../../services/auth-service/auth.service';
+import { LoginStateService } from '../../services/login-state/login-state.service';
 
 @Component({
   selector: 'app-header-after-login',
@@ -15,7 +16,7 @@ export class HeaderAfterLoginComponent implements OnInit {
 
   constructor(
     private readonly router: Router,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
   ) {
     this.routeInfoCustomer = ['customer'];
     this.routeAccount = ['account'];
@@ -23,7 +24,9 @@ export class HeaderAfterLoginComponent implements OnInit {
     this.routeInfoTransfer = ['transfer'];
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    
+  }
 
   goToHomeuser() {
     this.router.navigate(['./customer/home/']);

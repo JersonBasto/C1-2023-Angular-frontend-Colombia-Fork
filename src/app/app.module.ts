@@ -40,9 +40,10 @@ import { AccountUserComponent } from './modules/account/pages/account-user/accou
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
-import { AuthService } from './modules/main/services/auth.service';
+import { AuthService } from './modules/main/services/auth-service/auth.service';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { LoginStateService } from './modules/main/services/login-state/login-state.service';
 
 export function getToken() {
   return localStorage.getItem('token');
@@ -95,7 +96,7 @@ export function getToken() {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
   ],
-  providers: [ServiceUserService, ServiceAccountService, AuthService],
+  providers: [ServiceUserService, ServiceAccountService, AuthService, LoginStateService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

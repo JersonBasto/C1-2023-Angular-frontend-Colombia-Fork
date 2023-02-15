@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IIdFireBase } from 'src/app/modules/main/models/id-firebase.model';
+import { ILoginGoogle } from 'src/app/modules/main/models/login-google.model';
 import { IResLogin } from 'src/app/modules/main/models/res-login.model';
 import { UseGoogle } from 'src/app/modules/main/models/user-google.model';
 import { IGetUser } from '../../../main/interfaces/user-get/user-get.interface';
@@ -21,7 +23,7 @@ export class ServiceUserService {
       newUser
     );
   }
-  createUserGoogle(newUser: UseGoogle):Observable<IResLogin> {
+  createUserGoogle(newUser: UseGoogle): Observable<IResLogin> {
     return this.httpClient.post<IResLogin>(
       'http://localhost:3000/security/user-google',
       newUser
@@ -36,6 +38,13 @@ export class ServiceUserService {
     return this.httpClient.post<IResLogin>(
       'http://localhost:3000/security/login',
       loginuser
+    );
+  }
+
+  loginGoogle(idFireBase: IIdFireBase): Observable<IResLogin> {
+    return this.httpClient.post<IResLogin>(
+      'http://localhost:3000/security/login/google',
+      idFireBase
     );
   }
 
