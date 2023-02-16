@@ -1,0 +1,19 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">OutCome</th>
+      <th scope="col">Reason</th>
+      <th scope="col">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let transfer of transfers">
+      <th>{{transfer.id}}</th>
+      <td>{{transfer.outcome.customer.fullName}}</td>
+      <td>{{transfer.reason}}</td>
+      <td>{{transfer.amount}}</td>
+    </tr>
+  </tbody>
+</table>
+<app-pagination (changePage)="getPageHistory($any($event))"></app-pagination>

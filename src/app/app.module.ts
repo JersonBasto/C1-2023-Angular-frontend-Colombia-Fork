@@ -47,6 +47,11 @@ import { LoginStateService } from './modules/main/services/login-state/login-sta
 import { DataUserComponent } from './modules/main/components/data-user/data-user.component';
 import { DepositServiceService } from './modules/deposits/services/deposit-service.service';
 import { TransferServiceService } from './modules/transfers/services/transfer-service.service';
+import { AllInfoTransferComponent } from './modules/transfers/pages/all-info-transfer/all-info-transfer.component';
+import { TransferHistoryOutcomeComponent } from './modules/transfers/pages/transfer-history-outcome/transfer-history-outcome.component';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { PaginationComponent } from './modules/main/components/pagination/pagination.component';
+import { TransferHistoryIncomeComponent } from './modules/transfers/pages/transfer-history-income/transfer-history-income.component';
 
 export function getToken() {
   return localStorage.getItem('token');
@@ -83,6 +88,10 @@ export function getToken() {
     HomeCustomerComponent,
     AccountUserComponent,
     DataUserComponent,
+    AllInfoTransferComponent,
+    TransferHistoryOutcomeComponent,
+    PaginationComponent,
+    TransferHistoryIncomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -99,6 +108,7 @@ export function getToken() {
     provideAuth(() => getAuth()),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
+    MatSlideToggleModule,
   ],
   providers: [
     ServiceUserService,

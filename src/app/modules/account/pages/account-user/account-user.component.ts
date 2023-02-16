@@ -36,15 +36,23 @@ export class AccountUserComponent implements OnInit {
     this.router.navigate(['customer/create-account/' + this.id]);
   }
 
-  goToAccount(id:string){
-    this.router.navigate(["./account/"+id])
+  goToAccount(id: string) {
+    this.router.navigate(['./account/' + id]);
   }
 
-  goToCreateDeposit(id:string){
-    this.router.navigate(["customer/create-deposit/"+id])
+  goToCreateDeposit(id: string) {
+    this.router.navigate(['customer/create-deposit/' + id]);
   }
 
-  goToCreateTransfer(id:string){
-    this.router.navigate(["customer/create-transfer/"+id])
+  goToCreateTransfer(id: string) {
+    this.router.navigate(['customer/create-transfer/' + id]);
+  }
+
+  goToHistoryOutcome(id: string) {
+    this.router.navigate(['customer/transfer-history/outcome/' + id]);
+  }
+
+  goToHistoryIncome(id: string) {
+    this.router.navigate(['customer/transfer-history/income/' + id]);
   }
 }

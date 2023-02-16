@@ -24,4 +24,29 @@ export class TransferServiceService {
       data
     );
   }
+
+  getTransferById(id: string): Observable<IResTransfer> {
+    return this.httpClient.get<IResTransfer>(
+      'http://localhost:3000/transfer/' + id
+    );
+  }
+
+  getHistoryOutcome(
+    idAccount: string,
+    data: IGetHistory
+  ): Observable<IResTransfer[]> {
+    return this.httpClient.post<IResTransfer[]>(
+      'http://localhost:3000/transfer/historyOut/' + idAccount,
+      data
+    );
+  }
+  getHistoryIncome(
+    idAccount: string,
+    data: IGetHistory
+  ): Observable<IResTransfer[]> {
+    return this.httpClient.post<IResTransfer[]>(
+      'http://localhost:3000/transfer/historyIncome/' + idAccount,
+      data
+    );
+  }
 }

@@ -21,6 +21,21 @@
       <button (click)="goToCreateDeposit(account.id)">Depositar</button>
       <button (click)="goToCreateTransfer(account.id)">Transferencia</button>
     </div>
-    <button class="btn-account-get" (click)="goToAccount(account.id)">Observar</button>
+    <label>Tranferencias</label>
+    <div class="subcontainer-btns">
+      <button (click)="goToHistoryOutcome(account.id)">
+        Historial de Salida
+      </button>
+      <button (click)="goToHistoryIncome(account.id)">
+        Historial de Entrada
+      </button>
+    </div>
+    <label>Depositos</label>
+    <div class="subcontainer-btns">
+      <button (click)="goToHistoryOutcome(account.id)">Historial</button>
+    </div>
+    <button class="btn-account-get" (click)="goToAccount(account.id)">
+      Observar
+    </button>
   </div>
 </div>

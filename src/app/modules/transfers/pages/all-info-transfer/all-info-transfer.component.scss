@@ -1,0 +1,15 @@
+.container-iat {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 2%;
+}
+.subcontainer-iat {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  border: 1px solid black;
+  border-radius: 10px;
+  text-align: center;
+  margin: auto;
+  gap: 10px;
+}

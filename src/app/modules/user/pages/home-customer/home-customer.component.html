@@ -2,39 +2,43 @@
   <div class="chc-profile">
     <div class="chc-profile-first">
       <div class="chc-avatar"></div>
-      <h4 class="chc-name">{{fullName | customPipeData}}</h4>
+      <h4 class="chc-name">{{ fullName | customPipeData }}</h4>
     </div>
     <div class="chc-profile-second">
       <div class="chc-info">
         <h5>Nombre Completo</h5>
-        <h6>{{fullName}}</h6>
+        <h6>{{ fullName }}</h6>
       </div>
       <div class="chc-info">
         <h5>Tipo de documento</h5>
-        <h6>{{documentType}}</h6>
+        <h6>{{ documentType }}</h6>
       </div>
       <div class="chc-info">
         <h5>Numero de documento</h5>
-        <h6>{{document}}</h6>
+        <h6>{{ document }}</h6>
       </div>
     </div>
     <div class="chc-profile-third">
       <div class="chc-info">
         <h5>Email</h5>
-        <h6>{{email}}</h6>
+        <h6>{{ email }}</h6>
       </div>
       <div class="chc-info">
         <h5>Telefono</h5>
-        <h6>{{phone}}</h6>
+        <h6>{{ phone }}</h6>
       </div>
     </div>
     <div class="chc-profile-four">
-        <button class="chc-accounts" (click)="goToAccount()">Mis cuentas</button>
-        <button class="chc-deposits">Mis depositos</button>
-        <button class="chc-transfer">Mis transferencias</button>
+      <button class="chc-accounts" (click)="goToAccount()">Mis cuentas</button>
+      <button class="chc-deposits">Mis depositos</button>
+      <button class="chc-transfer" (click)="goToTransfer()">
+        Mis transferencias
+      </button>
     </div>
     <div class="chc-profile-five">
-        <button class="chc-update" (click)="goToUpdateCustomer()">Actulizar Datos</button>
-    </div>  
+      <button class="chc-update" (click)="goToUpdateCustomer()">
+        Actulizar Datos
+      </button>
+    </div>
   </div>
 </div>

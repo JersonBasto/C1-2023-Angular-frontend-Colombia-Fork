@@ -20,6 +20,9 @@ import {
 import { CreateAccountComponent } from '../account/pages/create-account/create-account.component';
 import { CreateDepositComponent } from '../deposits/pages/create-deposit/create-deposit.component';
 import { CreateTransferComponent } from '../transfers/pages/create-transfer/create-transfer.component';
+import { AllInfoTransferComponent } from '../transfers/pages/all-info-transfer/all-info-transfer.component';
+import { TransferHistoryOutcomeComponent } from '../transfers/pages/transfer-history-outcome/transfer-history-outcome.component';
+import { TransferHistoryIncomeComponent } from '../transfers/pages/transfer-history-income/transfer-history-income.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['customer/home']);
@@ -100,6 +103,24 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
+  {
+    path: 'customer/transfer-info/:id',
+    component: AllInfoTransferComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'customer/transfer-history/outcome/:id',
+    component: TransferHistoryOutcomeComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'customer/transfer-history/income/:id',
+    component: TransferHistoryIncomeComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  }
 ];
 
 @NgModule({

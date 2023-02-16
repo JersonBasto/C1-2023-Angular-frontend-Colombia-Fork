@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IResTransfer } from '../../models/get-transfer.model';
 import { TransferServiceService } from '../../services/transfer-service.service';
 
 @Component({
@@ -10,12 +11,16 @@ import { TransferServiceService } from '../../services/transfer-service.service'
 export class InfoTransferComponent implements OnInit {
   outcome: string;
   id: string;
+  transfers: IResTransfer[];
+
   constructor(
     private readonly transferService: TransferServiceService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
   ) {
     this.outcome = '';
     this.id = '';
+    this.transfers = [];
   }
 
   ngOnInit(): void {
@@ -30,10 +35,10 @@ export class InfoTransferComponent implements OnInit {
       actualPage: 1,
       range: 10,
     };
-    console.log(this.id)
+    console.log(this.id);
     this.transferService.getHistory(this.id, data).subscribe({
       next: (data) => {
-        console.log(data);
+        this.transfers = data;
       },
       error: (err) => {
         console.log(err);
@@ -42,5 +47,9 @@ export class InfoTransferComponent implements OnInit {
         console.log('complete');
       },
     });
+  }
+
+  goToInfoTransfer(id: string) {
+    this.router.navigate(['customer/transfer-info/' + id]);
   }
 }
