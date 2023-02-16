@@ -14,20 +14,20 @@
     </thead>
     <tbody>
       <tr *ngFor="let transfer of transfers">
-        <th>{{ transfer.id }}</th>
-        <td>{{ transfer.outcome.id }}</td>
+        <th>{{ transfer.id |cutId }}</th>
+        <td>{{ transfer.outcome.id |cutId }}</td>
         <td>{{ transfer.outcome.customer.fullName }}</td>
-        <td>{{ transfer.income.id }}</td>
+        <td>{{ transfer.income.id |cutId }}</td>
         <td>{{ transfer.income.customer.fullName }}</td>
         <td>{{ transfer.reason }}</td>
-        <td>{{ transfer.amount }}</td>
+        <td>{{ transfer.amount | currency : "COP" : "$" }}</td>
         <td>
           <button
             type="button"
             class="btn btn-primary"
             (click)="goToInfoTransfer(transfer.id)"
           >
-            Primary
+            Observar
           </button>
         </td>
       </tr>

@@ -9,7 +9,7 @@
   </thead>
   <tbody>
     <tr *ngFor="let transfer of transfers">
-      <th>{{ transfer.id }}</th>
+      <th>{{ transfer.id |cutId }}</th>
       <td>{{ transfer.outcome.customer.fullName }}</td>
       <td>{{ transfer.reason }}</td>
       <td>{{ transfer.amount }}</td>

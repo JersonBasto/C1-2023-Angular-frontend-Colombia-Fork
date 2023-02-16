@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { IGetHistory } from '../../transfers/models/get-history.model';
 import { ICreateDeposit } from '../models/create-deposit.model';
 import { IResDeposit } from '../models/res-create-deposit.model';
 
@@ -23,7 +24,16 @@ export class DepositServiceService {
     );
   }
 
-  //getHistoryDeposit(id:string,): Observable<IResDeposit>{
-  //  return this.httpClient.post<IResDeposit>("http://localhost:3000/deposit//getHistory/"+id,)
-  //}
+  getHistoryDeposit(id: string, data: IGetHistory): Observable<IResDeposit[]> {
+    return this.httpClient.post<IResDeposit[]>(
+      'http://localhost:3000/deposit/getHistory/' + id,
+      data
+    );
+  }
+
+  findByCustomerId(id: string): Observable<IResDeposit[]> {
+    return this.httpClient.get<IResDeposit[]>(
+      'http://localhost:3000/deposit/all-deposits/' + id
+    );
+  }
 }

@@ -70,6 +70,18 @@ export class HeaderAfterLoginComponent implements OnInit {
     this.router.navigate(['customer/transfer-history/' + this.id]);
   }
 
+  goToAccountInfo() {
+    this.router.navigate(['customer/account']);
+  }
+
+  goToCustomerHome() {
+    this.router.navigate(['/customer/home']);
+  }
+
+  goToDeposits() {
+    this.router.navigate(['customer/deposit-all']);
+  }
+
   SignOut() {
     return this.authService.SignOut();
   }

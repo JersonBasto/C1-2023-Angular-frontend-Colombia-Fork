@@ -55,4 +55,8 @@ export class AccountUserComponent implements OnInit {
   goToHistoryIncome(id: string) {
     this.router.navigate(['customer/transfer-history/income/' + id]);
   }
+
+  goToHistoryDeposit(id: string) {
+    this.router.navigate(['customer/deposit-history/' + id]);
+  }
 }

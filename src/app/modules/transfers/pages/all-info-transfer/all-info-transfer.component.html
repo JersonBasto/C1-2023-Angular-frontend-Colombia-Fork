@@ -4,7 +4,7 @@
       >Id Transferencia</label
     >
     <label for="exampleFormControlInput1" class="form-label">{{
-      idTransfer
+      idTransfer |cutId 
     }}</label>
     <label for="exampleFormControlInput1" class="form-label"
       >Nombre Receptor</label
@@ -28,7 +28,7 @@
       >Monto enviado</label
     >
     <label for="exampleFormControlInput1" class="form-label">{{
-        amount
+        amount | currency:"COP":"$"
     }}</label>
   </div>
 </div>

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
-import { AppRoutingModule } from './modules/main/app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './modules/main/app.component';
 import {
   HeroesComponent,
@@ -52,6 +52,10 @@ import { TransferHistoryOutcomeComponent } from './modules/transfers/pages/trans
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { PaginationComponent } from './modules/main/components/pagination/pagination.component';
 import { TransferHistoryIncomeComponent } from './modules/transfers/pages/transfer-history-income/transfer-history-income.component';
+import { DepositHistoryComponent } from './modules/deposits/pages/deposit-history/deposit-history.component';
+import { CutIdPipe } from './modules/main/pipes/cut-id/cut-id.pipe';
+import { DepositAllHistoryComponent } from './modules/deposits/pages/deposit-all-history/deposit-all-history.component';
+import { UserModule } from './modules/user/user.module';
 
 export function getToken() {
   return localStorage.getItem('token');
@@ -92,6 +96,9 @@ export function getToken() {
     TransferHistoryOutcomeComponent,
     PaginationComponent,
     TransferHistoryIncomeComponent,
+    DepositHistoryComponent,
+    CutIdPipe,
+    DepositAllHistoryComponent,
   ],
   imports: [
     BrowserModule,
@@ -109,6 +116,7 @@ export function getToken() {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     MatSlideToggleModule,
+    UserModule
   ],
   providers: [
     ServiceUserService,

@@ -9,10 +9,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let transfer of transfers">
-      <th>{{transfer.id}}</th>
-      <td>{{transfer.outcome.customer.fullName}}</td>
-      <td>{{transfer.reason}}</td>
-      <td>{{transfer.amount}}</td>
+      <th>{{ transfer.id |cutId }}</th>
+      <td>{{ transfer.outcome.customer.fullName }}</td>
+      <td>{{ transfer.reason }}</td>
+      <td>{{ transfer.amount | currency : "COP" : "$" }}</td>
     </tr>
   </tbody>
 </table>
