@@ -22,10 +22,10 @@ import { AccountComponent } from './modules/account/pages/account/account.compon
 import { CreateAccountComponent } from './modules/account/pages/create-account/create-account.component';
 import { UpdateAccountComponent } from './modules/account/pages/update-account/update-account.component';
 import { UpdateCostumerComponent } from './modules/user/pages/update-costumer/update-costumer.component';
-import { CreateDepositComponent } from './modules/main/pages/create-deposit/create-deposit.component';
+import { CreateDepositComponent } from './modules/deposits/pages/create-deposit/create-deposit.component';
 import { CreateTransferComponent } from './modules/main/pages/create-transfer/create-transfer.component';
 import { InfoCostumerComponent } from './modules/user/pages/info-costumer/info-costumer.component';
-import { InfoDepositComponent } from './modules/main/pages/info-deposit/info-deposit.component';
+import { InfoDepositComponent } from './modules/deposits/pages/info-deposit/info-deposit.component';
 import { InfoTransferComponent } from './modules/main/pages/info-transfer/info-transfer.component';
 import { HeaderComponent } from './modules/main/components/header/header.component';
 import { HeaderAfterLoginComponent } from './modules/main/components/header-after-login/header-after-login.component';
@@ -44,6 +44,7 @@ import { AuthService } from './modules/main/services/auth-service/auth.service';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { LoginStateService } from './modules/main/services/login-state/login-state.service';
+import { DataUserComponent } from './modules/main/components/data-user/data-user.component';
 
 export function getToken() {
   return localStorage.getItem('token');
@@ -79,6 +80,7 @@ export function getToken() {
     InfoAccountComponent,
     HomeCustomerComponent,
     AccountUserComponent,
+    DataUserComponent,
   ],
   imports: [
     BrowserModule,

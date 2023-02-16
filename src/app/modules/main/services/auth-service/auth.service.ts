@@ -41,8 +41,8 @@ export class AuthService {
     return this.afAuth.signInWithPopup(provider).then((result) => {
       this.userService.loginGoogle({ id: result.user?.uid ?? '' }).subscribe({
         next: (data) => {
-          console.log(data);
           localStorage.setItem('access_Token', data.access_token);
+          localStorage.setItem('id', data.id);
         },
       });
       this.changeStateLogin();
@@ -66,6 +66,7 @@ export class AuthService {
         };
         this.userService.createUserGoogle(NewUser as UseGoogle).subscribe({
           next: (data) => {
+            localStorage.setItem('access_Token', data.access_token);
             localStorage.setItem('id', data.id);
           },
           error: (err) => {
@@ -93,6 +94,9 @@ export class AuthService {
       localStorage.removeItem('user');
       localStorage.removeItem('uid');
       localStorage.removeItem('token');
+      localStorage.removeItem('access_Token');
+      localStorage.removeItem('id');
+      localStorage.removeItem('login');
       this.router.navigate(['login']);
     });
   }

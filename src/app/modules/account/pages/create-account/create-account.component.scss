@@ -1,0 +1,26 @@
+.container-create-account {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 2%;
+}
+.subcontainer-cca {
+  border: 1px solid black;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  gap: 15px;
+  text-align: center;
+  border-radius: 10px;
+  margin: auto;
+}
+.btn-cca {
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 10px;
+}
+.select-account{
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}

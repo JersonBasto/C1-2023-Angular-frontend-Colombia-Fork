@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { ServiceUserService } from 'src/app/modules/user/services/user-service/service-user.service';
 import { LoginStateService } from '../../services/login-state/login-state.service';
 
 @Component({
@@ -11,7 +12,10 @@ export class HeaderComponent implements OnInit {
   routeLogin: string[];
   routeHome: string[];
   routeRegister: string[];
-  constructor(private readonly loginStateService: LoginStateService) {
+  constructor(
+    private readonly loginStateService: LoginStateService,
+    
+  ) {
     this.login = this.loginStateService.state;
     this.routeLogin = ['login'];
     this.routeHome = [''];
@@ -25,4 +29,6 @@ export class HeaderComponent implements OnInit {
       },
     });
   }
+
+  
 }

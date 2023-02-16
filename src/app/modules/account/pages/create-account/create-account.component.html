@@ -1,1 +1,11 @@
-<p>create-account works!</p>
+<div class="container-create-account">
+  <div class="subcontainer-cca" [formGroup]="frmFormulario">
+    <p>Tipo de cuenta</p>
+    <select formControlName="accountType" class="select-account">
+      <option value=""></option>
+      <option value="TI">Cuenta de Ahorros</option>
+      <option value="CC">Cuenta Corriente</option>
+    </select>
+    <button class="btn-cca" (click)="createAccount()">Crear cuenta</button>
+  </div>
+</div>

@@ -4,7 +4,7 @@ import { AccountComponent } from '../account/pages/account/account.component';
 import { HomeComponent } from './pages/home/home.component';
 import { InfoAccountComponent } from '../account/pages/info-account/info-account.component';
 import { InfoCostumerComponent } from '../user/pages/info-costumer/info-costumer.component';
-import { InfoDepositComponent } from './pages/info-deposit/info-deposit.component';
+import { InfoDepositComponent } from '../deposits/pages/info-deposit/info-deposit.component';
 import { InfoTransferComponent } from './pages/info-transfer/info-transfer.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
@@ -17,6 +17,7 @@ import {
   redirectLoggedInTo,
   redirectUnauthorizedTo,
 } from '@angular/fire/compat/auth-guard';
+import { CreateAccountComponent } from '../account/pages/create-account/create-account.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['customer/home']);
@@ -76,6 +77,12 @@ const routes: Routes = [
   {
     path: 'customer/account',
     component: AccountUserComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'customer/create-account/:id',
+    component: CreateAccountComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },

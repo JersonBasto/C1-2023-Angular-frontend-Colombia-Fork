@@ -1,5 +1,5 @@
 export interface IAccounType {
-  id: string;
+  id?: string;
   name: string;
-  state: boolean;
+  state?: boolean;
 }
