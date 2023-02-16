@@ -1,1 +1,12 @@
-<p>create-deposit works!</p>
+<div class="container-create-deposit">
+  <div class="subcontainer-cd" [formGroup]="frmFormulario">
+    <div class="item-cd">
+      <input
+        type="number"
+        placeholder="Monto a enviar"
+        formControlName="amount"
+      />
+    </div>
+    <button (click)="createDeposit()">Crear Deposito</button>
+  </div>
+</div>

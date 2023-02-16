@@ -5,7 +5,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { InfoAccountComponent } from '../account/pages/info-account/info-account.component';
 import { InfoCostumerComponent } from '../user/pages/info-costumer/info-costumer.component';
 import { InfoDepositComponent } from '../deposits/pages/info-deposit/info-deposit.component';
-import { InfoTransferComponent } from './pages/info-transfer/info-transfer.component';
+import { InfoTransferComponent } from '../transfers/pages/info-transfer/info-transfer.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { UpdateCostumerComponent } from '../user/pages/update-costumer/update-costumer.component';
@@ -18,6 +18,8 @@ import {
   redirectUnauthorizedTo,
 } from '@angular/fire/compat/auth-guard';
 import { CreateAccountComponent } from '../account/pages/create-account/create-account.component';
+import { CreateDepositComponent } from '../deposits/pages/create-deposit/create-deposit.component';
+import { CreateTransferComponent } from '../transfers/pages/create-transfer/create-transfer.component';
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['customer/home']);
@@ -27,12 +29,6 @@ const routes: Routes = [
   {
     path: 'customer',
     component: InfoCostumerComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-  },
-  {
-    path: 'transfer',
-    component: InfoTransferComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
@@ -83,6 +79,24 @@ const routes: Routes = [
   {
     path: 'customer/create-account/:id',
     component: CreateAccountComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'customer/create-deposit/:id',
+    component: CreateDepositComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'customer/create-transfer/:id',
+    component: CreateTransferComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'customer/transfer-history/:id',
+    component: InfoTransferComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },

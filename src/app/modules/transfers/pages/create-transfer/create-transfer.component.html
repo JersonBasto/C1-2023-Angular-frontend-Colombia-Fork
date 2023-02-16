@@ -1,0 +1,18 @@
+<div class="container-transfer">
+  <div class="subcontainer-transfer" [formGroup]="frmFormulario">
+    <div>
+      <label>Id Cuenta de Salida</label>
+      <label>Aqui va el ID</label>
+    </div>
+    <div>
+      <input placeholder="ID cuenta a enviar" formControlName="income" />
+      <input placeholder="Mensaje" formControlName="reason" />
+    </div>
+    <div>
+      <input placeholder="Monto a enviar" formControlName="amount" />
+    </div>
+    <div>
+      <button (click)="createTransfer()">Enviar transferencia</button>
+    </div>
+  </div>
+</div>

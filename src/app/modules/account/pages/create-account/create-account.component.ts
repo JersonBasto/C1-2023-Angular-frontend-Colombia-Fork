@@ -34,10 +34,11 @@ export class CreateAccountComponent implements OnInit {
     let newAccount = {
       customer: this.id,
       accountType: {
-        name: String(this.frmFormulario.get('accountType')),
+        name: String(this.frmFormulario.get('accountType')?.value),
       },
       balance: 0,
     };
+    console.log(newAccount)
     return this.accountService
       .createAccount(newAccount as ICreateAccount)
       .subscribe({

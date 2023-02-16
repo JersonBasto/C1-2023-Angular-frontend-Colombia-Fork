@@ -11,6 +11,7 @@ import { ServiceAccountService } from '../../services/account-service/service-ac
 export class AccountUserComponent implements OnInit {
   id: string | null;
   accounts: IAccountRes[];
+  account: any;
 
   constructor(
     private readonly serviceAccount: ServiceAccountService,
@@ -32,6 +33,18 @@ export class AccountUserComponent implements OnInit {
   }
 
   goToCreateAccount() {
-    this.router.navigate(['customer/create-account/'+this.id]);
+    this.router.navigate(['customer/create-account/' + this.id]);
+  }
+
+  goToAccount(id:string){
+    this.router.navigate(["./account/"+id])
+  }
+
+  goToCreateDeposit(id:string){
+    this.router.navigate(["customer/create-deposit/"+id])
+  }
+
+  goToCreateTransfer(id:string){
+    this.router.navigate(["customer/create-transfer/"+id])
   }
 }

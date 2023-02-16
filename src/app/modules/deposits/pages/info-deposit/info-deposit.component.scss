@@ -1,14 +1,22 @@
-.container-deposit{
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-top: 2%;
+.container-deposit {
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 2%;
 }
-.sub-container{
-    width: 400px;
-    margin: auto;
-    border: 1px solid black;
-    justify-content: center;
-    text-align: center;
-    padding: 10px;
-    border-radius: 10px;
+.sub-container {
+  width: 400px;
+  margin: auto;
+  border: 1px solid black;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+}
+.create-deposit {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  border: 1px solid black;
+  margin: auto;
+  margin-bottom: 10px;
 }

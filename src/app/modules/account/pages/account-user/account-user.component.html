@@ -12,10 +12,15 @@
     </div>
     <div class="subcontainer-account">
       <div class="subcontainer-info-customer">
+        <p>Tipo de Cuenta: {{ account.accountType.name }}</p>
         <p>Estado: {{ account.state }}</p>
         <p>Balance: {{ account.balance | currency : "COP" : "$" }}</p>
       </div>
     </div>
-    <button class="btn-account-get">Observar</button>
+    <div class="subcontainer-btns">
+      <button (click)="goToCreateDeposit(account.id)">Depositar</button>
+      <button (click)="goToCreateTransfer(account.id)">Transferencia</button>
+    </div>
+    <button class="btn-account-get" (click)="goToAccount(account.id)">Observar</button>
   </div>
 </div>

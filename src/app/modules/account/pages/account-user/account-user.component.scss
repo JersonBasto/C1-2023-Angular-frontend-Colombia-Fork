@@ -77,3 +77,8 @@
   visibility: visible;
   transform: translate(50px, 5px);
 }
+.subcontainer-btns{
+  display: flex;
+  justify-content: space-around;
+  margin: 5%;
+}

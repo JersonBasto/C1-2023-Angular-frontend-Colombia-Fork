@@ -23,10 +23,10 @@ import { CreateAccountComponent } from './modules/account/pages/create-account/c
 import { UpdateAccountComponent } from './modules/account/pages/update-account/update-account.component';
 import { UpdateCostumerComponent } from './modules/user/pages/update-costumer/update-costumer.component';
 import { CreateDepositComponent } from './modules/deposits/pages/create-deposit/create-deposit.component';
-import { CreateTransferComponent } from './modules/main/pages/create-transfer/create-transfer.component';
+import { CreateTransferComponent } from './modules/transfers/pages/create-transfer/create-transfer.component';
 import { InfoCostumerComponent } from './modules/user/pages/info-costumer/info-costumer.component';
 import { InfoDepositComponent } from './modules/deposits/pages/info-deposit/info-deposit.component';
-import { InfoTransferComponent } from './modules/main/pages/info-transfer/info-transfer.component';
+import { InfoTransferComponent } from './modules/transfers/pages/info-transfer/info-transfer.component';
 import { HeaderComponent } from './modules/main/components/header/header.component';
 import { HeaderAfterLoginComponent } from './modules/main/components/header-after-login/header-after-login.component';
 import { FooterComponent } from './modules/main/components/footer/footer.component';
@@ -45,6 +45,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { LoginStateService } from './modules/main/services/login-state/login-state.service';
 import { DataUserComponent } from './modules/main/components/data-user/data-user.component';
+import { DepositServiceService } from './modules/deposits/services/deposit-service.service';
+import { TransferServiceService } from './modules/transfers/services/transfer-service.service';
 
 export function getToken() {
   return localStorage.getItem('token');
@@ -98,7 +100,14 @@ export function getToken() {
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
   ],
-  providers: [ServiceUserService, ServiceAccountService, AuthService, LoginStateService],
+  providers: [
+    ServiceUserService,
+    ServiceAccountService,
+    AuthService,
+    LoginStateService,
+    DepositServiceService,
+    TransferServiceService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

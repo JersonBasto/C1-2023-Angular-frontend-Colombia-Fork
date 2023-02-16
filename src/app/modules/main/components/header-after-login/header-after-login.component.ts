@@ -53,7 +53,7 @@ export class HeaderAfterLoginComponent implements OnInit {
     this.userService.getUserById(this.id).subscribe({
       next: (data) => {
         console.log(data);
-        this.setData.emit(data)
+        this.setData.emit(data);
       },
       error: (err) => {
         console.log(err);
@@ -62,6 +62,12 @@ export class HeaderAfterLoginComponent implements OnInit {
         console.log('complete');
       },
     });
+  }
+
+  goToTransferInfo() {
+    const idLocal = localStorage.getItem('id');
+    this.id = idLocal !== null ? idLocal : '';
+    this.router.navigate(['customer/transfer-history/' + this.id]);
   }
 
   SignOut() {
