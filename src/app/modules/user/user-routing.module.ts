@@ -8,6 +8,7 @@ import {
   redirectUnauthorizedTo,
 } from '@angular/fire/compat/auth-guard';
 import { UpdateCostumerComponent } from './pages/update-costumer/update-costumer.component';
+import { HomeComponent } from './home/home.component';
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['customer/home']);
 
@@ -22,6 +23,12 @@ const routes: Routes = [
   {
     path: 'customer/update/:id',
     component: UpdateCostumerComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'home/customer',
+    component: HomeComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },

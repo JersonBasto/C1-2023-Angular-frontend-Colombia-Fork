@@ -1,0 +1,30 @@
+<div class="container-home">
+  <div class="subcontainer-home">
+    <div class="avatar"></div>
+    <div class="bienvenida">
+      <h3>Bienvenid@ {{ customer?.fullName }}</h3>
+      <button type="button" class="btn btn-danger" (click)="unsubscribeUser()">
+        Darse de Baja
+      </button>
+    </div>
+    <div class="text-accounts">
+      <h3>Todas sus cuentas</h3>
+    </div>
+    <div class="container-acc">
+      <div class="accounts" *ngFor="let account of accounts">
+        <div class="accounts-group1">
+          <h5 class="title">Id</h5>
+          <h6>{{ account.id }}</h6>
+        </div>
+        <div class="accounts-group2">
+          <h5 class="title">Saldo</h5>
+          <h6>{{ account.balance | currency : "COP" : "$" }}</h6>
+        </div>
+        <div class="accounts-group3">
+          <h5 class="title">Estado</h5>
+          <h6>{{ account.state }}</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

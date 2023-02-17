@@ -16,6 +16,13 @@
   width: 450px;
   border-radius: 10px;
   box-shadow: 0px 3px 10px 1px;
+  overflow: hidden;
+  height: 250px;
+  transition: 0.5s;
+}
+.form-account:hover {
+  height: 580px;
+  transition: 0.5s;
 }
 
 .form-account p {
@@ -77,7 +84,7 @@
   visibility: visible;
   transform: translate(50px, 5px);
 }
-.subcontainer-btns{
+.subcontainer-btns {
   display: flex;
   justify-content: space-around;
   margin: 5%;

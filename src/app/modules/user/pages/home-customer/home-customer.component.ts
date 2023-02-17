@@ -54,7 +54,7 @@ export class HomeCustomerComponent implements OnInit {
     this.router.navigate(['./customer/account']);
   }
   goToDeposits() {
-    this.router.navigate(['./customer/deposit']);
+    this.router.navigate(['/customer/deposit-all']);
   }
   goToTransfer() {
     this.router.navigate(['customer/transfer-history/'+this.id]);

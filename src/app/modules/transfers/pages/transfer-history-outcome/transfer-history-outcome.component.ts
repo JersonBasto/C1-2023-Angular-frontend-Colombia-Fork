@@ -31,6 +31,7 @@ export class TransferHistoryOutcomeComponent implements OnInit {
     let data = {
       actualPage: this.pageActual,
       range: 10,
+      token: localStorage.getItem('access_Token'),
     };
     this.transferService.getHistoryOutcome(this.idOutcome, data).subscribe({
       next: (data) => {

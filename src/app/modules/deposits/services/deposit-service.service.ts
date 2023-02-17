@@ -18,9 +18,10 @@ export class DepositServiceService {
     );
   }
 
-  getDepositsById(id: string): Observable<IResDeposit> {
-    return this.httpClient.get<IResDeposit>(
-      'http://localhost:3000/deposit/' + id
+  getDepositsById(id: string, data: any): Observable<IResDeposit> {
+    return this.httpClient.post<IResDeposit>(
+      'http://localhost:3000/deposit/get/' + id,
+      data
     );
   }
 
@@ -31,9 +32,10 @@ export class DepositServiceService {
     );
   }
 
-  findByCustomerId(id: string): Observable<IResDeposit[]> {
-    return this.httpClient.get<IResDeposit[]>(
-      'http://localhost:3000/deposit/all-deposits/' + id
+  findByCustomerId(id: string, data: any): Observable<IResDeposit[]> {
+    return this.httpClient.post<IResDeposit[]>(
+      'http://localhost:3000/deposit/all-deposits/' + id,
+      data
     );
   }
 }

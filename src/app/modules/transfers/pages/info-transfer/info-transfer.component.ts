@@ -34,6 +34,7 @@ export class InfoTransferComponent implements OnInit {
     let data = {
       actualPage: 1,
       range: 10,
+      token: localStorage.getItem('access_Token'),
     };
     console.log(this.id);
     this.transferService.getHistory(this.id, data).subscribe({

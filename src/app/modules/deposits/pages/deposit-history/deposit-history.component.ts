@@ -30,6 +30,7 @@ export class DepositHistoryComponent implements OnInit {
     let data = {
       actualPage: this.pageActual,
       range: 10,
+      token:localStorage.getItem("access_Token")
     };
     this.depositService.getHistoryDeposit(this.idAccount, data).subscribe({
       next: (data) => {

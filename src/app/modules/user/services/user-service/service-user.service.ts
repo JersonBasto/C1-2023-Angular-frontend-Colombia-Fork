@@ -58,4 +58,8 @@ export class ServiceUserService {
       user
     );
   }
+
+  unsubscribeUser(id: string) {
+    return this.httpClient.delete('http://localhost:3000/user/' + id);
+  }
 }

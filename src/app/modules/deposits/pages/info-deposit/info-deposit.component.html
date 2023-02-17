@@ -1,11 +1,22 @@
 <div class="container-deposit">
-    <div class="create-deposit" click="()"></div>
-    <div class="sub-container">
-        <div class="group">
-            <h5>Deposito</h5>
-        </div>
-        <div class="group">
-            <h5>Cuenta</h5>
-        </div>
+  <div class="sub-container">
+    <div class="group">
+      <h5>ID Deposito</h5>
+      <h6>{{ deposit?.id }}</h6>
     </div>
+    <div class="group">
+      <h5>ID Cuenta</h5>
+      <h6>{{ deposit?.account?.id }}</h6>
+    </div>
+    <div class="group">
+      <h5>Dueño de Cuenta</h5>
+      <h6>{{ deposit?.account?.customer?.fullName }}</h6>
+      <h5>Email</h5>
+      <h6>{{ deposit?.account?.customer?.email }}</h6>
+      <h5>Monto</h5>
+      <h6>{{ deposit?.amount | currency : "COP" : "$" }}</h6>
+      <h5>Fecha</h5>
+      <h6>{{ deposit?.dateTime | date : "medium" }}</h6>
+    </div>
+  </div>
 </div>

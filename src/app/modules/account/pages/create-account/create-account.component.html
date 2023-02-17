@@ -6,6 +6,21 @@
       <option value="CA">Cuenta de Ahorros</option>
       <option value="CC">Cuenta Corriente</option>
     </select>
-    <button class="btn-cca" (click)="createAccount()">Crear cuenta</button>
+    <div
+      class="altoMensaje"
+      *ngIf="
+        frmFormulario.get('accountType')?.hasError('required') &&
+        frmFormulario.get('accountType')?.touched
+      "
+    >
+      * El tipo de cuenta es requerido
+    </div>
+    <button
+      class="btn-cca"
+      (click)="createAccount()"
+      [disabled]="frmFormulario.invalid"
+    >
+      Crear cuenta
+    </button>
   </div>
 </div>

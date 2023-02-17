@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { ICreateAccount } from '../../models/create-account.model';
 import { ServiceAccountService } from '../../services/account-service/service-account.service';
 
@@ -18,9 +20,12 @@ export class CreateAccountComponent implements OnInit {
   frmFormulario: FormGroup;
   id: string;
 
-  constructor(private readonly accountService: ServiceAccountService) {
+  constructor(
+    private readonly accountService: ServiceAccountService,
+    private readonly router: Router
+  ) {
     this.frmFormulario = new FormGroup({
-      accountType: new FormControl(Validators.required),
+      accountType: new FormControl('', Validators.required),
     });
     this.id = '';
   }
@@ -38,19 +43,42 @@ export class CreateAccountComponent implements OnInit {
       },
       balance: 0,
     };
-    console.log(newAccount)
-    return this.accountService
-      .createAccount(newAccount as ICreateAccount)
-      .subscribe({
-        next: (data) => {
-          console.log(data);
-        },
-        error: (err) => {
-          console.log(err);
-        },
-        complete: () => {
-          console.log('complete');
-        },
-      });
+    Swal.fire({
+      title: '¿Esta seguro?',
+      text: 'Creera una cuenta de tipo ' + newAccount.accountType.name,
+      icon: 'question',
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.accountService
+          .createAccount(newAccount as ICreateAccount)
+          .subscribe({
+            next: (data) => {
+              Swal.fire({
+                title: 'Cuenta creada',
+                text:
+                  'La cuenta de tipo ' +
+                  data.accountType.name +
+                  ' ha sido creada',
+                icon: 'success',
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.router.navigate(['customer/account']);
+                }
+              });
+            },
+            error: (err) => {
+              Swal.fire({
+                title: 'Error',
+                text: 'Ha ocurrido un error',
+                icon: 'error',
+              });
+            },
+            complete: () => {
+              console.log('complete');
+            },
+          });
+      }
+    });
   }
 }

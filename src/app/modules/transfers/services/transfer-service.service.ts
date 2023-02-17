@@ -25,9 +25,10 @@ export class TransferServiceService {
     );
   }
 
-  getTransferById(id: string): Observable<IResTransfer> {
-    return this.httpClient.get<IResTransfer>(
-      'http://localhost:3000/transfer/' + id
+  getTransferById(id: string, data: any): Observable<IResTransfer> {
+    return this.httpClient.post<IResTransfer>(
+      'http://localhost:3000/transfer/' + id,
+      data
     );
   }
 

@@ -74,6 +74,10 @@ export class HeaderAfterLoginComponent implements OnInit {
     this.router.navigate(['customer/account']);
   }
 
+  goToHome(){
+    this.router.navigate(["/home/customer"])
+  }
+
   goToCustomerHome() {
     this.router.navigate(['/customer/home']);
   }

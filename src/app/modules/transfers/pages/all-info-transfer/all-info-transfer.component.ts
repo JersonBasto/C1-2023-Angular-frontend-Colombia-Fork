@@ -32,7 +32,10 @@ export class AllInfoTransferComponent implements OnInit {
   }
 
   getDataTransfer() {
-    this.transferService.getTransferById(this.idTransfer).subscribe({
+    let data = {
+      token: localStorage.getItem('access_Token'),
+    };
+    this.transferService.getTransferById(this.idTransfer, data).subscribe({
       next: (data) => {
         console.log(data);
         this.customerEmail = data.income.customer.email;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { DepositServiceService } from '../../services/deposit-service.service';
 
 @Component({
@@ -14,10 +15,11 @@ export class CreateDepositComponent implements OnInit {
 
   constructor(
     private readonly depositServie: DepositServiceService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly router: Router
   ) {
     this.frmFormulario = new FormGroup({
-      amount: new FormControl([Validators.required]),
+      amount: new FormControl(null, [Validators.required]),
     });
     this.idDeposit = '';
   }
@@ -30,17 +32,42 @@ export class CreateDepositComponent implements OnInit {
     let newDeposit = {
       account: String(this.idDeposit),
       amount: this.frmFormulario.get('amount')?.value,
+      token: localStorage.getItem('access_Token'),
     };
-    this.depositServie.createDeposit(newDeposit).subscribe({
-      next: (data) => {
-        console.log(data);
-      },
-      error: (err) => {
-        console.log(err);
-      },
-      complete: () => {
-        console.log('complete');
-      },
+    Swal.fire({
+      title: '¿Esta seguro de realizar este deposito?',
+      text: 'Realizara un deposito por ' + newDeposit.amount,
+      icon: 'question',
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.depositServie.createDeposit(newDeposit).subscribe({
+          next: (data) => {
+            Swal.fire({
+              title: 'Deposito creado',
+              text:
+                'El deposito para la cuenta ' +
+                data.account.id +
+                ' se ha realizado con exito',
+              icon: 'success',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.router.navigate(['customer/account']);
+              }
+            });
+          },
+          error: (err) => {
+            Swal.fire({
+              title: 'Deposito bloqueado',
+              text: 'Ha ocurrido un error ',
+              icon: 'error',
+            });
+          },
+          complete: () => {
+            console.log('complete');
+          },
+        });
+      }
     });
   }
 }

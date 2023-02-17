@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IResDeposit } from '../../models/res-create-deposit.model';
 import { DepositServiceService } from '../../services/deposit-service.service';
 
@@ -10,7 +11,10 @@ import { DepositServiceService } from '../../services/deposit-service.service';
 export class DepositAllHistoryComponent implements OnInit {
   id: string;
   deposits: IResDeposit[];
-  constructor(private readonly depositService: DepositServiceService) {
+  constructor(
+    private readonly depositService: DepositServiceService,
+    private readonly router: Router
+  ) {
     this.id = '';
     this.deposits = [];
   }
@@ -21,9 +25,11 @@ export class DepositAllHistoryComponent implements OnInit {
   }
 
   getDataDeposit() {
-    this.depositService.findByCustomerId(this.id).subscribe({
+    let data = {
+      token: localStorage.getItem('access_Token'),
+    };
+    this.depositService.findByCustomerId(this.id, data).subscribe({
       next: (data) => {
-        console.log(data);
         this.deposits = data;
       },
       error: (err) => {
@@ -33,5 +39,10 @@ export class DepositAllHistoryComponent implements OnInit {
         console.log('complete');
       },
     });
+  }
+
+  goToDepositInfo(id: string) {
+    console.log(id);
+    this.router.navigate(['customer/deposit-info/' + id]);
   }
 }

@@ -25,14 +25,23 @@ export class AuthService {
 
   GoogleAuth() {
     return this.AuthLogin(new auth.GoogleAuthProvider()).then((res: any) => {
-      this.router.navigate(['customer/home']);
+      if (res) {
+        this.router.navigate(['customer/home']);
+      } else {
+        this.router.navigate(['login']);
+      }
     });
   }
 
   GoogleAuthLogin() {
     return this.AuthLoginGoogle(new auth.GoogleAuthProvider()).then(
       (res: any) => {
-        this.router.navigate(['customer/home']);
+        console.log(res);
+        if (res) {
+          this.router.navigate(['customer/home']);
+        } else {
+          this.router.navigate(['login']);
+        }
       }
     );
   }
@@ -43,14 +52,21 @@ export class AuthService {
         next: (data) => {
           localStorage.setItem('access_Token', data.access_token);
           localStorage.setItem('id', data.id);
+          this.changeStateLogin();
+          localStorage.setItem('user', JSON.stringify(result.user));
+          localStorage.setItem('uid', result.user?.uid ?? '');
+          result.user
+            ?.getIdToken()
+            .then((token) => localStorage.setItem('token', token));
+          this.router.navigate(['customer/home']);
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          console.log('complete');
         },
       });
-      this.changeStateLogin();
-      localStorage.setItem('user', JSON.stringify(result.user));
-      localStorage.setItem('uid', result.user?.uid ?? '');
-      result.user
-        ?.getIdToken()
-        .then((token) => localStorage.setItem('token', token));
     });
   }
 
@@ -68,6 +84,13 @@ export class AuthService {
           next: (data) => {
             localStorage.setItem('access_Token', data.access_token);
             localStorage.setItem('id', data.id);
+            this.changeStateLogin();
+            localStorage.setItem('user', JSON.stringify(result.user));
+            localStorage.setItem('uid', result.user?.uid ?? '');
+            result.user
+              ?.getIdToken()
+              .then((token) => localStorage.setItem('token', token));
+            this.router.navigate(['customer/home']);
           },
           error: (err) => {
             console.log(err);
@@ -76,13 +99,6 @@ export class AuthService {
             'Complete';
           },
         });
-        this.router.navigate(['customer/home']);
-        this.changeStateLogin();
-        localStorage.setItem('user', JSON.stringify(result.user));
-        localStorage.setItem('uid', result.user?.uid ?? '');
-        result.user
-          ?.getIdToken()
-          .then((token) => localStorage.setItem('token', token));
       })
       .catch((error) => {
         window.alert(error);

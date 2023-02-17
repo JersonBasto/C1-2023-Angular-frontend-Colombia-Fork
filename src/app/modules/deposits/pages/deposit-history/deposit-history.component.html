@@ -1,19 +1,21 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">ID</th>
-      <th scope="col">OutCome</th>
-      <th scope="col">Amount</th>
-      <th scope="col">Date</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let deposit of deposits">
-      <th>{{ deposit.id |cutId  }}</th>
-      <td>{{ deposit.account.customer.fullName }}</td>
-      <td>{{ deposit.amount | currency : "COP" : "$" }}</td>
-      <td>{{ deposit.dateTime | date : "medium" }}</td>
-    </tr>
-  </tbody>
-</table>
-<app-pagination (changePage)="getPageHistory($any($event))"></app-pagination>
+<div class="container-thi">
+  <table class="table table-dark table-striped">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">OutCome</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let deposit of deposits">
+        <th>{{ deposit.id | cutId }}</th>
+        <td>{{ deposit.account.customer.fullName }}</td>
+        <td>{{ deposit.amount | currency : "COP" : "$" }}</td>
+        <td>{{ deposit.dateTime | date : "medium" }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <app-pagination (changePage)="getPageHistory($any($event))"></app-pagination>
+</div>

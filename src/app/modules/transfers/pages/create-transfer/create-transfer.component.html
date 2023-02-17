@@ -1,18 +1,62 @@
 <div class="container-transfer">
   <div class="subcontainer-transfer" [formGroup]="frmFormulario">
-    <div>
+    <div class="subdiv">
       <label>Id Cuenta de Salida</label>
-      <label>Aqui va el ID</label>
+      <label>{{ outcome }}</label>
+    </div>
+    <div class="subdiv">
+      <input
+        placeholder="ID cuenta a enviar"
+        formControlName="income"
+        class="input"
+      />
+    </div>
+    <div
+      class="altoMensaje"
+      *ngIf="
+        frmFormulario.get('income')?.hasError('required') &&
+        frmFormulario.get('income')?.touched
+      "
+    >
+      * El ID de la cuenta es requerido
+    </div>
+    <div class="subdiv">
+      <input placeholder="Mensaje" formControlName="reason" class="input" />
+    </div>
+    <div
+      class="altoMensaje"
+      *ngIf="
+        frmFormulario.get('reason')?.hasError('required') &&
+        frmFormulario.get('reason')?.touched
+      "
+    >
+      * El mensaje es requerido
+    </div>
+    <div class="subdiv">
+      <input
+        placeholder="Monto a enviar"
+        formControlName="amount"
+        class="input"
+      />
+    </div>
+    <div
+      class="altoMensaje"
+      *ngIf="
+        frmFormulario.get('amount')?.hasError('required') &&
+        frmFormulario.get('amount')?.touched
+      "
+    >
+      * El Monto es requerido
     </div>
     <div>
-      <input placeholder="ID cuenta a enviar" formControlName="income" />
-      <input placeholder="Mensaje" formControlName="reason" />
-    </div>
-    <div>
-      <input placeholder="Monto a enviar" formControlName="amount" />
-    </div>
-    <div>
-      <button (click)="createTransfer()">Enviar transferencia</button>
+      <button
+        type="button"
+        class="btn btn-success"
+        (click)="createTransfer()"
+        [disabled]="frmFormulario.invalid"
+      >
+        Enviar transferencia
+      </button>
     </div>
   </div>
 </div>

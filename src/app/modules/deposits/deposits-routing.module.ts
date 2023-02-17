@@ -9,6 +9,7 @@ import {
 import { CreateDepositComponent } from './pages/create-deposit/create-deposit.component';
 import { DepositHistoryComponent } from './pages/deposit-history/deposit-history.component';
 import { DepositAllHistoryComponent } from './pages/deposit-all-history/deposit-all-history.component';
+import { InfoDepositComponent } from './pages/info-deposit/info-deposit.component';
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['customer/home']);
 const routes: Routes = [
@@ -26,10 +27,15 @@ const routes: Routes = [
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
-
   {
     path: 'customer/deposit-all',
     component: DepositAllHistoryComponent,
+    canActivate: [AngularFireAuthGuard],
+    data: { authGuardPipe: redirectUnauthorizedToLogin },
+  },
+  {
+    path: 'customer/deposit-info/:id',
+    component: InfoDepositComponent,
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },
