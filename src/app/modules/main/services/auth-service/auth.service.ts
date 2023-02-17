@@ -104,6 +104,7 @@ export class AuthService {
         window.alert(error);
       });
   }
+
   SignOut() {
     return this.afAuth.signOut().then(() => {
       this.changeStateLogin();
