@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { IInfoModel } from '../../models/info.model';
 import { UserModel } from '../../models/user.model';
 import { ServiceUserService } from '../../services/user-service/service-user.service';
 
@@ -17,6 +18,7 @@ export class HomeCustomerComponent implements OnInit {
   email: string;
   phone: string;
   getUser?: Observable<UserModel>;
+  image: string;
 
   constructor(
     private readonly router: Router,
@@ -28,9 +30,12 @@ export class HomeCustomerComponent implements OnInit {
     this.email = '';
     this.phone = '';
     this.documentType = '';
+    this.image = '';
   }
 
   ngOnInit(): void {
+    let user = JSON.stringify(localStorage.getItem('user') ?? '');
+    console.log(user)
     const idLocal = localStorage.getItem('id');
     this.id = idLocal !== null ? idLocal : '';
     this.customerService.getUserById(this.id).subscribe({
@@ -57,7 +62,7 @@ export class HomeCustomerComponent implements OnInit {
     this.router.navigate(['/customer/deposit-all']);
   }
   goToTransfer() {
-    this.router.navigate(['customer/transfer-history/'+this.id]);
+    this.router.navigate(['customer/transfer-history/' + this.id]);
   }
   goToUpdateCustomer() {
     this.router.navigate(['./customer/update/' + this.id]);
