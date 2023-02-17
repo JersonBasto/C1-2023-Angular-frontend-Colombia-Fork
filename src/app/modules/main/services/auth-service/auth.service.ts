@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import * as auth from 'firebase/auth';
 import { ServiceUserService } from '../../../user/services/user-service/service-user.service';
 import { NewUserModel } from '../../models/new-user.model';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+} from '@angular/fire/compat/firestore';
 import { UseGoogle } from '../../models/user-google.model';
 import { LoginStateService } from '../login-state/login-state.service';
 
@@ -18,7 +22,8 @@ export class AuthService {
     private afAuth: AngularFireAuth,
     private readonly router: Router,
     private readonly userService: ServiceUserService,
-    private readonly loginStateService: LoginStateService
+    private readonly loginStateService: LoginStateService,
+    public afs: AngularFirestore
   ) {
     this.login = this.loginStateService.state;
   }
@@ -103,6 +108,97 @@ export class AuthService {
       .catch((error) => {
         window.alert(error);
       });
+  }
+  SignIn(email: string, password: string) {
+    return this.afAuth
+      .signInWithEmailAndPassword(email, password)
+      .then((result) => {
+        this.SetUserData(result.user);
+        this.afAuth.authState.subscribe((user) => {
+          if (user) {
+            let loginModel = {
+              email: email,
+              password: password,
+            };
+            this.userService.login(loginModel).subscribe({
+              next: (data) => {
+                localStorage.setItem('access_Token', data.access_token);
+                localStorage.setItem('id', data.id);
+                this.changeStateLogin();
+                localStorage.setItem('user', JSON.stringify(result.user));
+                localStorage.setItem('uid', result.user?.uid ?? '');
+                result.user
+                  ?.getIdToken()
+                  .then((token) => localStorage.setItem('token', token));
+                this.router.navigate(['customer/home']);
+              },
+              error: (err) => {
+                console.log(err);
+              },
+              complete: () => {
+                console.log('complete');
+              },
+            });
+            this.router.navigate(['customer/home']);
+          }
+        });
+      })
+      .catch((error) => {
+        window.alert(error.message);
+      });
+  }
+  SignUpEmailPassword(email: string, password: string, user: NewUserModel) {
+    return this.afAuth
+      .createUserWithEmailAndPassword(email, password)
+      .then((result) => {
+        this.userService.createNewUser(user).subscribe({
+          next: (data) => {
+            localStorage.setItem('access_Token', data.access_token);
+            localStorage.setItem('id', data.id);
+            this.changeStateLogin();
+            localStorage.setItem('user', JSON.stringify(result.user));
+            localStorage.setItem('uid', result.user?.uid ?? '');
+            result.user
+              ?.getIdToken()
+              .then((token) => localStorage.setItem('token', token));
+            this.router.navigate(['customer/home']);
+          },
+          error: (err) => {
+            console.log(err);
+          },
+          complete: () => {
+            console.log('complete');
+          },
+        });
+        this.SendVerificationMail();
+        this.SetUserData(result.user);
+      })
+      .catch((error) => {
+        window.alert(error.message);
+      });
+  }
+  SendVerificationMail() {
+    return this.afAuth.currentUser
+      .then((u: any) => u.sendEmailVerification())
+      .then(() => {
+        this.router.navigate(['verify-email-address']);
+      });
+  }
+
+  SetUserData(user: any) {
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
+      `users/${user.uid}`
+    );
+    const userData = {
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoURL: user.photoURL,
+      emailVerified: user.emailVerified,
+    };
+    return userRef.set(userData, {
+      merge: true,
+    });
   }
 
   SignOut() {

@@ -35,23 +35,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login() {
-    this.userService.login(this.frmFormulario.getRawValue()).subscribe({
-      next: (data) => {
-        localStorage.setItem('token', data.access_token);
-        localStorage.setItem('id', data.id);
-        this.goToHomeUser();
-      },
-      error: (err) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: err.error.message,
-        });
-      },
-      complete: () => {
-        console.log('complete');
-      },
-    });
+    this.authService.SignIn(
+      String(this.frmFormulario.get('email')?.value),
+      String(this.frmFormulario.get('password')?.value)
+    );
   }
   loginGoogle() {
     return this.authService.GoogleAuthLogin();

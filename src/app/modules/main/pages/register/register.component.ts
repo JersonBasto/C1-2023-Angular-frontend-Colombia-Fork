@@ -45,8 +45,7 @@ export class RegisterComponent implements OnInit {
         Validators.minLength(10),
       ]),
       password: new FormControl(null, [
-        Validators.required,
-        Validators.pattern(new RegExp(environment.regexPassword)),
+        Validators.required
       ]),
       documentType: new FormControl(null, [Validators.required]),
     });
@@ -55,17 +54,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   createUser() {
-    this.userService.createNewUser(this.frmFormulario.getRawValue()).subscribe({
-      next: (data) => {
-        localStorage.setItem('token', data.access_token);
-        localStorage.setItem('id', data.id);
-        this.goToHomeCustomer();
-      },
-      error: (error) => {
-        console.error(error);
-      },
-      complete: () => console.log('complete'),
-    });
+    this.authService.SignUpEmailPassword(
+      this.frmFormulario.get('email')?.value,
+      this.frmFormulario.get('password')?.value,
+      this.frmFormulario.getRawValue()
+    );
   }
   createUserByGoogle() {
     return this.authService.GoogleAuth();
