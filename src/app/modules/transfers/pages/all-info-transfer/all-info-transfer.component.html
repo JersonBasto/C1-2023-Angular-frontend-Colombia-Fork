@@ -1,31 +1,37 @@
 <div class="container-iat">
   <div class="mb-3 subcontainer-iat" >
-    <label for="exampleFormControlInput1" class="form-label"
-      >Id Transferencia</label
+    <h5 for="exampleFormControlInput1" class="form-label"
+      >Id Transferencia</h5
     >
     <label for="exampleFormControlInput1" class="form-label">{{
       idTransfer |cutId 
     }}</label>
-    <label for="exampleFormControlInput1" class="form-label"
-      >Nombre Receptor</label
+    <h5 for="exampleFormControlInput1" class="form-label"
+      >Nombre de Envio</h5
+    >
+    <label for="exampleFormControlInput1" class="form-label">{{
+      customerOutcome
+    }}</label>
+    <h5 for="exampleFormControlInput1" class="form-label"
+      >Nombre Receptor</h5
     >
     <label for="exampleFormControlInput1" class="form-label">{{
         customerName
     }}</label>
-    <label for="exampleFormControlInput1" class="form-label"
-      >Email</label
+    <h5 for="exampleFormControlInput1" class="form-label"
+      >Email</h5
     >
     <label for="exampleFormControlInput1" class="form-label">{{
         customerEmail
     }}</label>
-    <label for="exampleFormControlInput1" class="form-label"
-      >Mensaje</label
+    <h5 for="exampleFormControlInput1" class="form-label"
+      >Mensaje</h5
     >
     <label for="exampleFormControlInput1" class="form-label">{{
         reason
     }}</label>
-    <label for="exampleFormControlInput1" class="form-label"
-      >Monto enviado</label
+    <h5 for="exampleFormControlInput1" class="form-label"
+      >Monto enviado</h5
     >
     <label for="exampleFormControlInput1" class="form-label">{{
         amount | currency:"COP":"$"

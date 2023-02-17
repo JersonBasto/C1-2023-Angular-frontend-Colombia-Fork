@@ -17,6 +17,11 @@ import { ServiceUserService } from '../../services/user-service/service-user.ser
 export class UpdateCostumerComponent implements OnInit {
   id: string | null;
   frmFormulario: FormGroup;
+  public items: { field: string }[] = [
+    { field: 'CC' },
+    { field: 'TI' },
+    { field: 'Pasaporte' },
+  ];
 
   constructor(
     private readonly userService: ServiceUserService,
@@ -42,11 +47,7 @@ export class UpdateCostumerComponent implements OnInit {
         Validators.maxLength(10),
         Validators.minLength(10),
       ]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.pattern(new RegExp(environment.regexPassword)),
-      ]),
-      documentTypeId: new FormControl(),
+      documentType: new FormControl(null, [Validators.required]),
     });
     this.id = '';
   }
@@ -61,8 +62,7 @@ export class UpdateCostumerComponent implements OnInit {
           fullName: data.fullName,
           email: data.email,
           phone: data.phone,
-          password: data.password ?? '',
-          documentTypeId: data.documentType.id,
+          documentType: data.documentType.name,
         });
       },
       error: (err) => {
@@ -78,22 +78,46 @@ export class UpdateCostumerComponent implements OnInit {
     const idNew = this.route.snapshot.paramMap.get('id');
     console.log(this.frmFormulario);
     this.id = idNew !== null ? idNew : '';
-    this.userService
-      .updateUser(this.id, this.frmFormulario.getRawValue())
-      .subscribe({
-        next: (data) => {
-          Swal.fire({
-            title: 'Hecho',
-            text: 'Actualizacion Exitosa',
-            icon: 'success',
-          });
-        },
-        error: (err) => {
-          console.log(err);
-        },
-        complete: () => {
-          console.log('complete');
-        },
-      });
+    if (localStorage.getItem('uid')) {
+      this.userService
+        .updateUserGoogle(this.id, this.frmFormulario.getRawValue())
+        .subscribe({
+          next: (data) => {
+            Swal.fire({
+              title: 'Hecho',
+              text: 'Actualizacion Exitosa',
+              icon: 'success',
+            });
+          },
+          error: (err) => {
+            console.log(err);
+          },
+          complete: () => {
+            console.log('complete');
+          },
+        });
+    } else {
+      this.userService
+        .updateUser(this.id, this.frmFormulario.getRawValue())
+        .subscribe({
+          next: (data) => {
+            Swal.fire({
+              title: 'Hecho',
+              text: 'Actualizacion Exitosa',
+              icon: 'success',
+            });
+          },
+          error: (err) => {
+            console.log(err);
+          },
+          complete: () => {
+            console.log('complete');
+          },
+        });
+    }
+  }
+
+  obserForm() {
+    console.log(this.frmFormulario);
   }
 }

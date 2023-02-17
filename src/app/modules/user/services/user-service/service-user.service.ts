@@ -58,6 +58,12 @@ export class ServiceUserService {
       user
     );
   }
+  updateUserGoogle(id: string, user: IUpdateUser): Observable<IUpdateUser> {
+    return this.httpClient.put<IUpdateUser>(
+      'http://localhost:3000/user/user-google/' + id,
+      user
+    );
+  }
 
   unsubscribeUser(id: string) {
     return this.httpClient.delete('http://localhost:3000/user/' + id);

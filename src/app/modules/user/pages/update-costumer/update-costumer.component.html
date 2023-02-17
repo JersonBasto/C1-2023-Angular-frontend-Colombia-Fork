@@ -1,72 +1,125 @@
 <div class="container-update-customer">
-    <form id="formUpdateuser" class="subcontainer" (ngSubmit)="updateUser()" [formGroup]="frmFormulario">
-        <div class="sub-container-image">
-            <img>
-        </div>
-        <div class="sub-container">
-            <h5> Nombre: </h5>
-            <input class="sub-container-input" formControlName="fullName">
-            <div class="altoMensaje" *ngIf="
-        frmFormulario.get('fullName')?.hasError('required') &&
-        frmFormulario.get('fullName')?.touched
-      ">
-                * El nombre es requerido
-            </div>
-        </div>
-        <div class="sub-container">
-            <h5> Documento: </h5>
-            <input class="sub-container-input" formControlName="document">
-            <div class="altoMensaje" *ngIf="
-        frmFormulario.get('document')?.hasError('required') &&
-        frmFormulario.get('document')?.touched
-      ">
-                * El Documento es requerido
-            </div>
-            <div class="altoMensaje" *ngIf="
-        frmFormulario.get('document')?.hasError('maxlength') &&
-        frmFormulario.get('document')?.touched
-      ">
-                * El tamaño maximo corresponde a 11 caracteres
-            </div>
-            <div class="altoMensaje" *ngIf="
-        frmFormulario.get('document')?.hasError('minlength') &&
-        frmFormulario.get('document')?.touched
-      ">
-                * El tamaño maximo corresponde a 3 caracteres
-            </div>
-        </div>
-        <div class="sub-container">
-            <h5> Email: </h5>
-            <input class="sub-container-input" formControlName="email">
-            <div class="altoMensaje" *ngIf="
-        frmFormulario.get('email')?.hasError('required') &&
-        frmFormulario.get('email')?.touched
-      ">
-                * El email es requerido
-            </div>
-            <div class="altoMensaje" *ngIf="
-        frmFormulario.get('email')?.hasError('pattern') &&
-        frmFormulario.get('email')?.touched
-      ">
-                * No cumple con la estructura de un correo válido
-            </div>
-        </div>
-        <div class="sub-container">
-            <h5> Telefono: </h5>
-            <input class="sub-container-input" formControlName="phone">
-            <div class="altoMensaje" *ngIf="
-        frmFormulario.get('phone')?.hasError('maxlength') &&
-        frmFormulario.get('phone')?.touched
-      ">
-                * El tamaño maximo corresponde a 10 caracteres
-            </div>
-            <div class="altoMensaje" *ngIf="
-        frmFormulario.get('phone')?.hasError('minlength') &&
-        frmFormulario.get('phone')?.touched
-      ">
-                * El tamaño maximo corresponde a 10 caracteres
-            </div>
-        </div>
-        <button class="cic-update" form="formUpdateuser" [disabled]="frmFormulario.invalid">Actualizar</button>
-    </form>
+  <form
+    id="formUpdateuser"
+    class="subcontainer"
+    (ngSubmit)="updateUser()"
+    [formGroup]="frmFormulario"
+  >
+    <div class="sub-container-image">
+      <img />
+    </div>
+    <div class="sub-container">
+      <h5>Nombre:</h5>
+      <input class="sub-container-input" formControlName="fullName" />
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('fullName')?.hasError('required') &&
+          frmFormulario.get('fullName')?.touched
+        "
+      >
+        * El nombre es requerido
+      </div>
+    </div>
+    <div class="sub-container">
+      <h5 class="typeDocument">Seleccionar Tipo de Documento</h5>
+      <select formControlName="documentType" class="select-document">
+        <option value=""></option>
+        <option value="TI">TI</option>
+        <option value="CC">CC</option>
+        <option value="Pasaporte">Pasaporte</option>
+      </select>
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('documentType')?.hasError('required') &&
+          frmFormulario.get('documentType')?.touched
+        "
+      >
+        * El Tipo de Documento es requerido
+      </div>
+    </div>
+    <div class="sub-container">
+      <h5>Documento:</h5>
+      <input class="sub-container-input" formControlName="document" />
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('document')?.hasError('required') &&
+          frmFormulario.get('document')?.touched
+        "
+      >
+        * El Documento es requerido
+      </div>
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('document')?.hasError('maxlength') &&
+          frmFormulario.get('document')?.touched
+        "
+      >
+        * El tamaño maximo corresponde a 11 caracteres
+      </div>
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('document')?.hasError('minlength') &&
+          frmFormulario.get('document')?.touched
+        "
+      >
+        * El tamaño maximo corresponde a 3 caracteres
+      </div>
+    </div>
+    <div class="sub-container">
+      <h5>Email:</h5>
+      <input class="sub-container-input" formControlName="email" />
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('email')?.hasError('required') &&
+          frmFormulario.get('email')?.touched
+        "
+      >
+        * El email es requerido
+      </div>
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('email')?.hasError('pattern') &&
+          frmFormulario.get('email')?.touched
+        "
+      >
+        * No cumple con la estructura de un correo válido
+      </div>
+    </div>
+    <div class="sub-container">
+      <h5>Telefono:</h5>
+      <input class="sub-container-input" formControlName="phone" />
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('phone')?.hasError('maxlength') &&
+          frmFormulario.get('phone')?.touched
+        "
+      >
+        * El tamaño maximo corresponde a 10 caracteres
+      </div>
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('phone')?.hasError('minlength') &&
+          frmFormulario.get('phone')?.touched
+        "
+      >
+        * El tamaño maximo corresponde a 10 caracteres
+      </div>
+    </div>
+    <button
+      class="cic-update"
+      form="formUpdateuser"
+      [disabled]="frmFormulario.invalid"
+    >
+      Actualizar
+    </button>
+  </form>
 </div>

@@ -3,17 +3,29 @@
     <thead>
       <tr>
         <th scope="col">ID</th>
-        <th scope="col">OutCome</th>
+        <th scope="col">Income</th>
+        <th scope="col">Outcome</th>
         <th scope="col">Reason</th>
         <th scope="col">Amount</th>
+        <th scope="col">Opciones</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let transfer of transfers">
         <th>{{ transfer.id | cutId }}</th>
+        <td>{{ transfer.income.customer.fullName }}</td>
         <td>{{ transfer.outcome.customer.fullName }}</td>
         <td>{{ transfer.reason }}</td>
         <td>{{ transfer.amount }}</td>
+        <td>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="goToInfoTransfer(transfer.id)"
+          >
+            Observar
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

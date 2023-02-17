@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IResTransfer } from '../../models/get-transfer.model';
 import { TransferServiceService } from '../../services/transfer-service.service';
 
@@ -15,7 +15,8 @@ export class TransferHistoryIncomeComponent implements OnInit {
 
   constructor(
     private readonly transferService: TransferServiceService,
-    private readonly route: ActivatedRoute
+    private readonly route: ActivatedRoute,
+    private readonly router:Router
   ) {
     this.idOutcome = '';
     this.pageActual = 1;
@@ -48,6 +49,8 @@ export class TransferHistoryIncomeComponent implements OnInit {
   getPageHistory(page: number): void {
     this.pageActual = page;
     this.getDataTransfers();
-    console.log('llega :' + page);
+  }
+  goToInfoTransfer(id: string) {
+    this.router.navigate(['customer/transfer-info/' + id]);
   }
 }

@@ -14,6 +14,7 @@ export class AllInfoTransferComponent implements OnInit {
   customerEmail: string;
   amount: number;
   reason: string;
+  customerOutcome: string;
 
   constructor(
     private readonly transferService: TransferServiceService,
@@ -24,6 +25,7 @@ export class AllInfoTransferComponent implements OnInit {
     this.customerName = '';
     this.amount = 0;
     this.reason = '';
+    this.customerOutcome = '';
   }
 
   ngOnInit(): void {
@@ -37,11 +39,11 @@ export class AllInfoTransferComponent implements OnInit {
     };
     this.transferService.getTransferById(this.idTransfer, data).subscribe({
       next: (data) => {
-        console.log(data);
         this.customerEmail = data.income.customer.email;
         this.customerName = data.income.customer.fullName;
         this.reason = data.reason;
         this.amount = data.amount;
+        this.customerOutcome = data.outcome.customer.fullName
       },
       error: (err) => {
         console.log(err);
