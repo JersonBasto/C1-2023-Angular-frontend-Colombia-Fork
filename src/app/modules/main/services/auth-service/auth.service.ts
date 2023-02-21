@@ -11,6 +11,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { UseGoogle } from '../../models/user-google.model';
 import { LoginStateService } from '../login-state/login-state.service';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -174,7 +175,11 @@ export class AuthService {
         this.SetUserData(result.user);
       })
       .catch((error) => {
-        window.alert(error.message);
+        Swal.fire({
+          title: 'Error',
+          text: error.message,
+          icon: 'error',
+        });
       });
   }
   SendVerificationMail() {
