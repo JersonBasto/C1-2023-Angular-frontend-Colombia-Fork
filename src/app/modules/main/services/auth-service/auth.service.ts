@@ -156,12 +156,12 @@ export class AuthService {
           next: (data) => {
             localStorage.setItem('access_Token', data.access_token);
             localStorage.setItem('id', data.id);
-            this.changeStateLogin();
             localStorage.setItem('user', JSON.stringify(result.user));
             localStorage.setItem('uid', result.user?.uid ?? '');
             result.user
               ?.getIdToken()
               .then((token) => localStorage.setItem('token', token));
+            this.changeStateLogin();
             this.router.navigate(['customer/home']);
           },
           error: (err) => {

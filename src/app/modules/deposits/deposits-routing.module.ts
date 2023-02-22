@@ -13,32 +13,24 @@ import { InfoDepositComponent } from './pages/info-deposit/info-deposit.componen
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['customer/home']);
 const routes: Routes = [
-  { path: '', component: DepositsComponent },
-
   {
-    path: 'customer/create-deposit/:id',
-    component: CreateDepositComponent,
+    path: '',
+    component: DepositsComponent,
+    children: [
+      { path: 'customer/deposit-all', component: DepositAllHistoryComponent },
+      {
+        path: 'customer/create-deposit/:id',
+        component: CreateDepositComponent,
+      },
+      {
+        path: 'customer/deposit-history/:id',
+        component: DepositHistoryComponent,
+      },
+      { path: 'customer/deposit-info/:id', component: InfoDepositComponent },
+    ],
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
-  },
-  {
-    path: 'customer/deposit-history/:id',
-    component: DepositHistoryComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-  },
-  {
-    path: 'customer/deposit-all',
-    component: DepositAllHistoryComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-  },
-  {
-    path: 'customer/deposit-info/:id',
-    component: InfoDepositComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-  },
+  }
 ];
 
 @NgModule({

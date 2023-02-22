@@ -16,35 +16,31 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['customer/home']);
 
 const routes: Routes = [
-  { path: '', component: TransfersComponent },
-
   {
-    path: 'customer/create-transfer/:id',
-    component: CreateTransferComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-  },
-  {
-    path: 'customer/transfer-history/:id',
-    component: InfoTransferComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-  },
-  {
-    path: 'customer/transfer-info/:id',
-    component: AllInfoTransferComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-  },
-  {
-    path: 'customer/transfer-history/outcome/:id',
-    component: TransferHistoryOutcomeComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-  },
-  {
-    path: 'customer/transfer-history/income/:id',
-    component: TransferHistoryIncomeComponent,
+    path: '',
+    component: TransfersComponent,
+    children: [
+      {
+        path: 'customer/create-transfer/:id',
+        component: CreateTransferComponent,
+      },
+      {
+        path: 'customer/transfer-history/:id',
+        component: InfoTransferComponent,
+      },
+      {
+        path: 'customer/transfer-info/:id',
+        component: AllInfoTransferComponent,
+      },
+      {
+        path: 'customer/transfer-history/outcome/:id',
+        component: TransferHistoryOutcomeComponent,
+      },
+      {
+        path: 'customer/transfer-history/income/:id',
+        component: TransferHistoryIncomeComponent,
+      },
+    ],
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },

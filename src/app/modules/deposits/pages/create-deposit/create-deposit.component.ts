@@ -10,17 +10,15 @@ import { DepositServiceService } from '../../services/deposit-service.service';
   styleUrls: ['./create-deposit.component.scss'],
 })
 export class CreateDepositComponent implements OnInit {
-  frmFormulario: FormGroup;
   idDeposit: string;
+  amount: string;
 
   constructor(
     private readonly depositServie: DepositServiceService,
     private readonly route: ActivatedRoute,
     private readonly router: Router
   ) {
-    this.frmFormulario = new FormGroup({
-      amount: new FormControl(null, [Validators.required]),
-    });
+    this.amount = '';
     this.idDeposit = '';
   }
 
@@ -31,7 +29,7 @@ export class CreateDepositComponent implements OnInit {
   createDeposit() {
     let newDeposit = {
       account: String(this.idDeposit),
-      amount: this.frmFormulario.get('amount')?.value,
+      amount: Number(this.amount),
       token: localStorage.getItem('access_Token'),
     };
     Swal.fire({
@@ -57,11 +55,19 @@ export class CreateDepositComponent implements OnInit {
             });
           },
           error: (err) => {
-            Swal.fire({
-              title: 'Deposito bloqueado',
-              text: 'Ha ocurrido un error ',
-              icon: 'error',
-            });
+            if (err.message) {
+              Swal.fire({
+                title: 'Deposito bloqueado',
+                text: err.message,
+                icon: 'error',
+              });
+            } else {
+              Swal.fire({
+                title: 'Deposito bloqueado',
+                text: 'Ha ocurrido un error ',
+                icon: 'error',
+              });
+            }
           },
           complete: () => {
             console.log('complete');

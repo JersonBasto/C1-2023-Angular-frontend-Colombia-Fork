@@ -13,22 +13,14 @@ const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToDashboard = () => redirectLoggedInTo(['customer/home']);
 
 const routes: Routes = [
-  { path: '', component: UserComponent },
   {
-    path: 'customer/home',
-    component: HomeCustomerComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-  },
-  {
-    path: 'customer/update/:id',
-    component: UpdateCostumerComponent,
-    canActivate: [AngularFireAuthGuard],
-    data: { authGuardPipe: redirectUnauthorizedToLogin },
-  },
-  {
-    path: 'home/customer',
-    component: HomeComponent,
+    path: '',
+    component: UserComponent,
+    children: [
+      { path: 'customer/home', component: HomeCustomerComponent },
+      { path: 'customer/update/:id', component: UpdateCostumerComponent },
+      { path: 'home/customer', component: HomeComponent },
+    ],
     canActivate: [AngularFireAuthGuard],
     data: { authGuardPipe: redirectUnauthorizedToLogin },
   },

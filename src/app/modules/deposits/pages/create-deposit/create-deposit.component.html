@@ -1,7 +1,6 @@
 <div class="container-create-deposit">
   <div
     class="subcontainer-cd"
-    [formGroup]="frmFormulario"
     (ngSubmit)="createDeposit()"
     id="formUpdateuser"
   >
@@ -9,20 +8,11 @@
       <input
         type="number"
         placeholder="Monto a enviar"
-        formControlName="amount"
         class="input"
+        [(ngModel)]="amount"
       />
     </div>
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('amount')?.hasError('required') &&
-        frmFormulario.get('amount')?.touched
-      "
-    >
-      * El Monto es requerido
-    </div>
-    <button (click)="createDeposit()" class="btn" [disabled]="frmFormulario.invalid">
+    <button (click)="createDeposit()" class="btn">
       Crear Deposito
     </button>
   </div>
