@@ -1,7 +1,8 @@
 export interface IUpdateUser {
-    documentType: string;
-    document: string;
-    fullName: string;
-    email: string;
-    phone: string;
+  idFireBase: string;
+  fullName: string;
+  email: string;
+  documentType: string;
+  document: string;
+  phone: string;
 }

@@ -78,24 +78,30 @@ export class UpdateCostumerComponent implements OnInit {
     const idNew = this.route.snapshot.paramMap.get('id');
     console.log(this.frmFormulario);
     this.id = idNew !== null ? idNew : '';
+    const updateUser = {
+      idFireBase: localStorage.getItem('uid') ?? '',
+      fullName: this.frmFormulario.get('fullName')?.value,
+      email: this.frmFormulario.get('email')?.value,
+      documentType: this.frmFormulario.get('documentType')?.value,
+      document: this.frmFormulario.get('document')?.value,
+      phone: this.frmFormulario.get('phone')?.value,
+    };
     if (localStorage.getItem('uid')) {
-      this.userService
-        .updateUserGoogle(this.id, this.frmFormulario.getRawValue())
-        .subscribe({
-          next: (data) => {
-            Swal.fire({
-              title: 'Hecho',
-              text: 'Actualizacion Exitosa',
-              icon: 'success',
-            });
-          },
-          error: (err) => {
-            console.log(err);
-          },
-          complete: () => {
-            console.log('complete');
-          },
-        });
+      this.userService.updateUserGoogle(this.id, updateUser).subscribe({
+        next: (data) => {
+          Swal.fire({
+            title: 'Hecho',
+            text: 'Actualizacion Exitosa',
+            icon: 'success',
+          });
+        },
+        error: (err) => {
+          console.log(err);
+        },
+        complete: () => {
+          console.log('complete');
+        },
+      });
     } else {
       this.userService
         .updateUser(this.id, this.frmFormulario.getRawValue())
