@@ -84,6 +84,8 @@ export class AuthService {
           idFireBase: String(result.user?.uid ?? ''),
           fullName: String(result.user?.displayName),
           email: String(result.user?.email),
+          documentType: '',
+          document: '',
           phone: String(result.user?.phoneNumber ?? ''),
         };
         this.userService.createUserGoogle(NewUser as UseGoogle).subscribe({

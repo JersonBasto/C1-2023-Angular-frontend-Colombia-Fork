@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { ServiceUserService } from 'src/app/modules/user/services/user-service/service-user.service';
 import { AuthService } from '../../services/auth-service/auth.service';
@@ -20,6 +20,8 @@ export class HeaderAfterLoginComponent implements OnInit {
   fullName: string;
   email: string;
   phone: string;
+  @Input()
+  nameUser: string;
   @Output()
   setData: EventEmitter<{}>;
 
@@ -39,6 +41,7 @@ export class HeaderAfterLoginComponent implements OnInit {
     this.email = '';
     this.phone = '';
     this.documentType = '';
+    this.nameUser = '';
   }
 
   ngOnInit(): void {}
@@ -74,8 +77,8 @@ export class HeaderAfterLoginComponent implements OnInit {
     this.router.navigate(['customer/account']);
   }
 
-  goToHome(){
-    this.router.navigate(["/home/customer"])
+  goToHome() {
+    this.router.navigate(['/home/customer']);
   }
 
   goToCustomerHome() {

@@ -4,5 +4,5 @@
         <button type="button" class="btn btn-primary btn-nav-header" [routerLink]="routeLogin">SingIn</button>
         <button type="button" class="btn btn-success btn-nav-header" [routerLink]="routeRegister">SingUp</button>
     </nav>
-    <app-header-after-login *ngIf="login"></app-header-after-login>
+    <app-header-after-login *ngIf="login" [nameUser]="nameUserC1"></app-header-after-login>
 </div>

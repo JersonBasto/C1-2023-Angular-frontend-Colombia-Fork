@@ -12,23 +12,39 @@ export class HeaderComponent implements OnInit {
   routeLogin: string[];
   routeHome: string[];
   routeRegister: string[];
+  nameUserC1: string;
   constructor(
     private readonly loginStateService: LoginStateService,
-    
+    private readonly userService: ServiceUserService
   ) {
     this.login = this.loginStateService.state;
     this.routeLogin = ['login'];
     this.routeHome = [''];
     this.routeRegister = ['register'];
+    this.nameUserC1 = '';
   }
 
   ngOnInit(): void {
     this.loginStateService.changeState.subscribe({
       next: (data: boolean) => {
         this.login = data;
+        if (data) {
+          this.userService
+            .getUserById(localStorage.getItem('id') ?? '')
+            .subscribe({
+              next: (data) => {
+                this.nameUserC1 = data.fullName;
+                console.log(data);
+              },
+              error: (err) => {
+                console.log(err);
+              },
+              complete: () => {
+                console.log('complete');
+              },
+            });
+        }
       },
     });
   }
-
-  
 }
