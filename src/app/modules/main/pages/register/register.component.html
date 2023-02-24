@@ -1,172 +1,170 @@
 <div class="container-register">
-  <form
-    class="form-register"
-    id="formUpdateuser"
-    [formGroup]="frmFormulario"
-  >
-    <label class="typeDocument">Seleccionar Tipo de Documento</label>
-    <select formControlName="documentType" class="select-document">
-      <option value=""></option>
-      <option value="TI">TI</option>
-      <option value="CC">CC</option>
-      <option value="Pasaporte">Pasaporte</option>
-    </select>
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('documentType')?.hasError('required') &&
-        frmFormulario.get('documentType')?.touched
-      "
-    >
-      * El tipo de documento es requerido
-    </div>
-    <input
-      class="input-register"
-      placeholder="Documento"
-      type="text"
-      formControlName="document"
-    />
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('document')?.hasError('required') &&
-        frmFormulario.get('document')?.touched
-      "
-    >
-      * El numero de documento es requerido
-    </div>
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('document')?.hasError('maxlength') &&
-        frmFormulario.get('document')?.touched
-      "
-    >
-      * El tamaño maximo corresponde a 11 caracteres
-    </div>
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('document')?.hasError('minlength') &&
-        frmFormulario.get('document')?.touched
-      "
-    >
-      * El tamaño maximo corresponde a 3 caracteres
-    </div>
-    <input
-      class="input-register"
-      placeholder="Nombre Completo"
-      formControlName="fullName"
-    />
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('fullName')?.hasError('required') &&
-        frmFormulario.get('fullName')?.touched
-      "
-    >
-      * El nombre Completo es requerido
-    </div>
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('document')?.hasError('maxlength') &&
-        frmFormulario.get('document')?.touched
-      "
-    >
-      * Supero el tamaño maximo aceptado
-    </div>
-    <input
-      class="input-register"
-      placeholder="Email"
-      type="email"
-      formControlName="email"
-    />
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('email')?.hasError('required') &&
-        frmFormulario.get('email')?.touched
-      "
-    >
-      * El email es requerido
-    </div>
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('email')?.hasError('pattern') &&
-        frmFormulario.get('email')?.touched
-      "
-    >
-      * No cumple con la estructura de un correo válido
-    </div>
-    <input
-      class="input-register"
-      placeholder="password"
-      type="password"
-      formControlName="password"
-    />
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('password')?.hasError('required') &&
-        frmFormulario.get('password')?.touched
-      "
-    >
-      * El password es requerido
-    </div>
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('password')?.hasError('pattern') &&
-        frmFormulario.get('password')?.touched
-      "
-    >
-      * No cumple con la estructura de una contraseña valida (Debe tener como
-      minimo 1 minuscula,1 mayuscula y un 1 numero)
-    </div>
-    <input
-      class="input-register"
-      placeholder="Telefono"
-      type="tel"
-      formControlName="phone"
-    />
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('phone')?.hasError('required') &&
-        frmFormulario.get('phone')?.touched
-      "
-    >
-      * El Telefono es requerido
-    </div>
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('phone')?.hasError('maxlength') &&
-        frmFormulario.get('phone')?.touched
-      "
-    >
-      * El tamaño maximo corresponde a 10 caracteres
-    </div>
-    <div
-      class="altoMensaje"
-      *ngIf="
-        frmFormulario.get('phone')?.hasError('minlength') &&
-        frmFormulario.get('phone')?.touched
-      "
-    >
-      * El tamaño maximo corresponde a 10 caracteres
-    </div>
-    <button
-      class="btn-register"
-      (click)="createUser()"
-      [disabled]="frmFormulario.invalid"
-    >
-      Registrarse
-    </button>
+  <div class="div-register">
+    <form class="form-register" id="formUpdateuser" [formGroup]="frmFormulario">
+      <label class="typeDocument">Seleccionar Tipo de Documento</label>
+      <select formControlName="documentType" class="select-document">
+        <option value=""></option>
+        <option value="TI">TI</option>
+        <option value="CC">CC</option>
+        <option value="Pasaporte">Pasaporte</option>
+      </select>
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('documentType')?.hasError('required') &&
+          frmFormulario.get('documentType')?.touched
+        "
+      >
+        * El tipo de documento es requerido
+      </div>
+      <input
+        class="input-register"
+        placeholder="Documento"
+        type="text"
+        formControlName="document"
+      />
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('document')?.hasError('required') &&
+          frmFormulario.get('document')?.touched
+        "
+      >
+        * El numero de documento es requerido
+      </div>
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('document')?.hasError('maxlength') &&
+          frmFormulario.get('document')?.touched
+        "
+      >
+        * El tamaño maximo corresponde a 11 caracteres
+      </div>
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('document')?.hasError('minlength') &&
+          frmFormulario.get('document')?.touched
+        "
+      >
+        * El tamaño maximo corresponde a 3 caracteres
+      </div>
+      <input
+        class="input-register"
+        placeholder="Nombre Completo"
+        formControlName="fullName"
+      />
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('fullName')?.hasError('required') &&
+          frmFormulario.get('fullName')?.touched
+        "
+      >
+        * El nombre Completo es requerido
+      </div>
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('document')?.hasError('maxlength') &&
+          frmFormulario.get('document')?.touched
+        "
+      >
+        * Supero el tamaño maximo aceptado
+      </div>
+      <input
+        class="input-register"
+        placeholder="Email"
+        type="email"
+        formControlName="email"
+      />
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('email')?.hasError('required') &&
+          frmFormulario.get('email')?.touched
+        "
+      >
+        * El email es requerido
+      </div>
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('email')?.hasError('pattern') &&
+          frmFormulario.get('email')?.touched
+        "
+      >
+        * No cumple con la estructura de un correo válido
+      </div>
+      <input
+        class="input-register"
+        placeholder="password"
+        type="password"
+        formControlName="password"
+      />
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('password')?.hasError('required') &&
+          frmFormulario.get('password')?.touched
+        "
+      >
+        * El password es requerido
+      </div>
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('password')?.hasError('pattern') &&
+          frmFormulario.get('password')?.touched
+        "
+      >
+        * No cumple con la estructura de una contraseña valida (Debe tener como
+        minimo 1 minuscula,1 mayuscula y un 1 numero)
+      </div>
+      <input
+        class="input-register"
+        placeholder="Telefono"
+        type="tel"
+        formControlName="phone"
+      />
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('phone')?.hasError('required') &&
+          frmFormulario.get('phone')?.touched
+        "
+      >
+        * El Telefono es requerido
+      </div>
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('phone')?.hasError('maxlength') &&
+          frmFormulario.get('phone')?.touched
+        "
+      >
+        * El tamaño maximo corresponde a 10 caracteres
+      </div>
+      <div
+        class="altoMensaje"
+        *ngIf="
+          frmFormulario.get('phone')?.hasError('minlength') &&
+          frmFormulario.get('phone')?.touched
+        "
+      >
+        * El tamaño maximo corresponde a 10 caracteres
+      </div>
+      <button
+        class="btn-register"
+        (click)="createUser()"
+        [disabled]="frmFormulario.invalid"
+      >
+        Registrarse
+      </button>
+    </form>
     <button (click)="createUserByGoogle()" class="registerGoogle">
       Google
     </button>
-  </form>
+  </div>
 </div>

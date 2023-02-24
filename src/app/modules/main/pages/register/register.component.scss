@@ -3,7 +3,7 @@
   margin-right: 5%;
   margin-top: 2%;
 }
-.form-register {
+.div-register {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -12,6 +12,11 @@
   margin: auto;
   padding: 50px;
   border-radius: 10px;
+}
+.form-register {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 .input-register {
   margin: auto;

@@ -34,7 +34,6 @@ export class HeaderComponent implements OnInit {
             .subscribe({
               next: (data) => {
                 this.nameUserC1 = data.fullName;
-                console.log(data);
               },
               error: (err) => {
                 console.log(err);

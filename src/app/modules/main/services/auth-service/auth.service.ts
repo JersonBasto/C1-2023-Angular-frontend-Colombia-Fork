@@ -58,16 +58,25 @@ export class AuthService {
         next: (data) => {
           localStorage.setItem('access_Token', data.access_token);
           localStorage.setItem('id', data.id);
-          this.changeStateLogin();
           localStorage.setItem('user', JSON.stringify(result.user));
           localStorage.setItem('uid', result.user?.uid ?? '');
           result.user
             ?.getIdToken()
             .then((token) => localStorage.setItem('token', token));
+          this.changeStateLogin(true);
           this.router.navigate(['customer/home']);
         },
         error: (err) => {
           console.log(err);
+          Swal.fire({
+            title: 'Error',
+            text: err.message,
+            icon: 'error',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.SignOut();
+            }
+          });
         },
         complete: () => {
           console.log('complete');
@@ -92,16 +101,25 @@ export class AuthService {
           next: (data) => {
             localStorage.setItem('access_Token', data.access_token);
             localStorage.setItem('id', data.id);
-            this.changeStateLogin();
             localStorage.setItem('user', JSON.stringify(result.user));
             localStorage.setItem('uid', result.user?.uid ?? '');
             result.user
               ?.getIdToken()
               .then((token) => localStorage.setItem('token', token));
+            this.changeStateLogin(true);
             this.router.navigate(['customer/home']);
           },
           error: (err) => {
             console.log(err);
+            Swal.fire({
+              title: 'Error',
+              text: err.message,
+              icon: 'error',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.SignOut();
+              }
+            });
           },
           complete: () => {
             'Complete';
@@ -127,16 +145,25 @@ export class AuthService {
               next: (data) => {
                 localStorage.setItem('access_Token', data.access_token);
                 localStorage.setItem('id', data.id);
-                this.changeStateLogin();
                 localStorage.setItem('user', JSON.stringify(result.user));
                 localStorage.setItem('uid', result.user?.uid ?? '');
                 result.user
                   ?.getIdToken()
                   .then((token) => localStorage.setItem('token', token));
+                this.changeStateLogin(true);
                 this.router.navigate(['customer/home']);
               },
               error: (err) => {
                 console.log(err);
+                Swal.fire({
+                  title: 'Error',
+                  text: err.message,
+                  icon: 'error',
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    this.SignOut();
+                  }
+                });
               },
               complete: () => {
                 console.log('complete');
@@ -163,11 +190,20 @@ export class AuthService {
             result.user
               ?.getIdToken()
               .then((token) => localStorage.setItem('token', token));
-            this.changeStateLogin();
+            this.changeStateLogin(true);
             this.router.navigate(['customer/home']);
           },
           error: (err) => {
             console.log(err);
+            Swal.fire({
+              title: 'Error',
+              text: err.message,
+              icon: 'error',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.SignOut();
+              }
+            });
           },
           complete: () => {
             console.log('complete');
@@ -210,7 +246,7 @@ export class AuthService {
 
   SignOut() {
     return this.afAuth.signOut().then(() => {
-      this.changeStateLogin();
+      this.changeStateLogin(false);
       localStorage.removeItem('user');
       localStorage.removeItem('uid');
       localStorage.removeItem('token');
@@ -220,8 +256,7 @@ export class AuthService {
       this.router.navigate(['login']);
     });
   }
-  changeStateLogin() {
-    this.loginStateService.state = !this.login;
-    this.login = this.loginStateService.state;
+  changeStateLogin(state: boolean) {
+    this.loginStateService.state = state;
   }
 }
